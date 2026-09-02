@@ -6,6 +6,7 @@ import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server
 import { getPaymentProvider } from "@/lib/payments";
 import { HOLD_COOKIE } from "@/lib/booking/hold-cookie";
 import type { BookingErrorCode } from "@/lib/booking/errors";
+import { getSiteUrl } from "@/lib/site-url";
 
 export interface PaymentState {
   status: "idle" | "error";
@@ -61,7 +62,7 @@ export async function startPayment(
     return { status: "error", code: "HOLD_EXPIRED" };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
   const provider = getPaymentProvider();
 
   let paymentUrl: string;

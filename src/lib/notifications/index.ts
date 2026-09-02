@@ -10,6 +10,7 @@ import {
   type ConfirmationData,
 } from "./templates";
 import type { Locale } from "@/types/database";
+import { getSiteUrl } from "@/lib/site-url";
 
 /**
  * Envoi des confirmations de réservation (CDC §3.2 : « confirmation
@@ -116,7 +117,7 @@ export async function notifyReservationConfirmed(
       reservation as unknown as { room_types: { content: Record<Locale, { name: string }> } }
     ).room_types.content;
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+    const siteUrl = getSiteUrl();
 
     const data: ConfirmationData = {
       reference: reservation.reference,

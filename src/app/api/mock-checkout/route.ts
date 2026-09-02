@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { MockPaymentProvider } from "@/lib/payments/mock";
 import { isMockPayment } from "@/lib/payments";
+import { getSiteUrl } from "@/lib/site-url";
 
 /**
  * Faux guichet Mobile Money.
@@ -96,7 +97,7 @@ export async function POST(request: Request) {
   const outcome = String(form.get("outcome") ?? "succeeded");
   const returnUrl = String(form.get("return") ?? "/");
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
   const provider = new MockPaymentProvider(
     siteUrl,
     process.env.CRON_SECRET ?? "mock-secret-dev"

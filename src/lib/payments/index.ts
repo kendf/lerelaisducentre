@@ -2,6 +2,7 @@ import "server-only";
 import { CinetPayProvider } from "./cinetpay";
 import { MockPaymentProvider } from "./mock";
 import type { PaymentProvider } from "./provider";
+import { getSiteUrl } from "@/lib/site-url";
 
 export type { PaymentProvider, PaymentEvent } from "./provider";
 export { PaymentError } from "./provider";
@@ -23,7 +24,7 @@ export { PaymentError } from "./provider";
  */
 export function getPaymentProvider(): PaymentProvider {
   const mode = process.env.PAYMENT_PROVIDER ?? "mock";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   if (mode === "mock") {
     return new MockPaymentProvider(

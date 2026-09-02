@@ -10,6 +10,7 @@ import { Footer } from "@/components/site/footer";
 import { DemoBanner } from "@/components/site/demo-banner";
 import { AssistantMount } from "@/components/site/assistant-mount";
 import "../globals.css";
+import { getSiteUrl } from "@/lib/site-url";
 
 /**
  * Typographies du CDC §5.3.
@@ -55,7 +56,7 @@ export async function generateMetadata({
       template: `%s — ${t("siteName")}`,
     },
     description: t("defaultDescription"),
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    metadataBase: new URL(getSiteUrl()),
     // Indique aux moteurs que les deux versions sont équivalentes : c'est ce
     // qui évite qu'ils considèrent la version anglaise comme du contenu dupliqué.
     alternates: {
