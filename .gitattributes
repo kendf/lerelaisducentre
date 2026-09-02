@@ -1,0 +1,6 @@
+# Les fichiers de police sont binaires : aucune conversion de fin de ligne,
+# sinon Windows les corrompt silencieusement au moment du commit.
+*.woff2 binary
+*.woff  binary
+*.ttf   binary
+*.otf   binary

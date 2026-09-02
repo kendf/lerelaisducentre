@@ -1,18 +1,30 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "../globals.css";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+/**
+ * Mêmes fichiers de police que le site public, versionnés dans le dépôt plutôt
+ * que récupérés chez Google au moment de la construction. La raison est
+ * détaillée dans src/app/[locale]/layout.tsx.
+ */
+
+const playfair = localFont({
+  src: "../../fonts/playfair-display-latin.woff2",
+  weight: "400 600",
+  style: "normal",
   variable: "--font-playfair",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
+  fallback: ["Georgia", "serif"],
 });
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "../../fonts/inter-latin.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-inter",
   display: "swap",
+  fallback: ["system-ui", "-apple-system", "sans-serif"],
 });
 
 export const metadata: Metadata = {
