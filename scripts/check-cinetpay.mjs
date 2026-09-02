@@ -31,9 +31,23 @@ const env = Object.fromEntries(
     .map((l) => [l.slice(0, l.indexOf("=")).trim(), l.slice(l.indexOf("=") + 1).trim()])
 );
 
-/** Empreinte lisible d'un secret : longueur et fin, jamais le contenu. */
+/**
+ * Empreinte lisible d'un secret : longueur, fin, et surtout PRÉSENCE DE
+ * CARACTÈRES NON ASCII.
+ *
+ * La longueur et les derniers caractères ne suffisent pas : « bacàsable1 » et
+ * « bacasable1 » ont exactement la même empreinte. Sans le contrôle d'encodage,
+ * impossible de dire si un mot de passe accentué a bien été remplacé — c'est
+ * arrivé sur ce projet.
+ */
 function fingerprint(value) {
-  return `${value.length} caractères, se termine par …${value.slice(-4)}`;
+  const exotic = [...value].filter((c) => c.charCodeAt(0) > 127);
+  const encodage = exotic.length
+    ? ` · ⚠ ${exotic.length} caractère(s) non ASCII : ${exotic
+        .map((c) => `${c} (U+${c.charCodeAt(0).toString(16).toUpperCase().padStart(4, "0")})`)
+        .join(", ")}`
+    : " · ASCII pur";
+  return `${value.length} caractères, se termine par …${value.slice(-4)}${encodage}`;
 }
 
 const checks = [];
@@ -105,6 +119,19 @@ console.log("");
 const blocking = checks.filter(([, status]) =>
   ["ABSENTE", "ABSENT", "PRÉFIXE INCONNU"].includes(status)
 );
+
+// Un identifiant machine n'a aucune raison de porter un accent : selon la
+// chaîne d'encodage, il peut être transmis différemment de ce que la
+// plateforme a enregistré. C'est un avertissement, pas un blocage.
+const exotic = checks.filter(([, , detail]) => detail.includes("non ASCII"));
+if (exotic.length > 0) {
+  console.log(
+    `  ⚠ ${exotic.length} identifiant(s) contiennent des caractères accentués.`
+  );
+  console.log(
+    "    À régénérer en ASCII pur : l'encodage est une cause d'échec silencieux.\n"
+  );
+}
 
 if (blocking.length > 0) {
   console.log(`  ${blocking.length} point(s) à traiter avant tout essai réel.\n`);
