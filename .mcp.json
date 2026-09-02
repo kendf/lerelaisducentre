@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "supabase-lerelaisducentre": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=abnfwdhwncptcmhvftkp",
+      "headers": {
+        "Authorization": "Bearer sbp_fc0abcae2e994bed04fa52e1d92dfa8acade34ac"
+      }
+    }
+  }
+}

@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+/* =============================================================================
+   Design system — Hôtel Le Relais du Centre
+   Cahier des charges §5.1 à §5.4
+
+   La palette et les typographies sont celles du CDC, dérivées du logo. Les
+   quatre teintes imposées sont reprises telles quelles ; les variantes
+   supplémentaires (survol, bordures, texte secondaire) en sont dérivées, sans
+   introduire de couleur étrangère à l'identité.
+
+   PAS DE MODE SOMBRE : l'identité de l'établissement est un médaillon ivoire
+   et bronze. Une version sombre trahirait la direction artistique validée au
+   §5.1 (« ambiance chaleureuse et sobre, tons crème et bronze »).
+   ============================================================================= */
+
+@theme {
+  /* --- Palette imposée (CDC §5.2) ------------------------------------------ */
+  --color-ivory: #f7f3ec;        /* fond, structure */
+  --color-bronze: #8b5e34;       /* accent : boutons, liens, titres */
+  --color-brown: #3b2a1e;        /* texte */
+  --color-palm: #4a5d3a;         /* secondaire, par touches */
+
+  /* --- Variantes dérivées -------------------------------------------------- */
+  --color-ivory-deep: #efe7da;   /* alternance de sections */
+  --color-ivory-line: #e2d7c5;   /* filets et bordures */
+  --color-bronze-dark: #6f4a28;  /* survol des boutons */
+  --color-bronze-soft: #a87b4f;  /* icônes, éléments discrets */
+  --color-bronze-tint: #eaded0;  /* fonds d'accent très clairs */
+  --color-brown-soft: #6b5748;   /* texte secondaire */
+  --color-cream: #fdfbf7;        /* cartes posées sur l'ivoire */
+
+  /* --- États --------------------------------------------------------------- */
+  --color-success: #4a5d3a;
+  --color-warning: #b07d2b;
+  --color-danger: #9c3b28;
+
+  /* --- Typographie (CDC §5.3) ---------------------------------------------- */
+  --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-script: var(--font-great-vibes), "Great Vibes", cursive;
+  --font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+
+  /* --- Rythme -------------------------------------------------------------- */
+  --spacing-section: 5.5rem;     /* « beaucoup d'espace blanc » — CDC §5.1 */
+  --radius-card: 2px;            /* angles quasi droits : registre classique */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Le sélecteur de langue déplace le contenu ; on évite le saut de mise
+       en page lié à l'apparition de la barre de défilement. */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-brown);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-brown);
+  }
+
+  /* Accessibilité (CDC §8) : la navigation clavier doit rester visible
+     partout, y compris sur les éléments d'interface personnalisés. */
+  :focus-visible {
+    outline: 2px solid var(--color-bronze);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-bronze);
+    color: var(--color-ivory);
+  }
+}
+
+@layer components {
+  /* La signature du logo. Réservée à « Le temps d'une pause » et aux accents
+     rares : une écriture manuscrite perd tout son effet si on l'utilise partout. */
+  .signature {
+    font-family: var(--font-script);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-bronze);
+  }
+
+  /* Boutons en capitales, interlettrage augmenté — CDC §5.3, ligne « Boutons ». */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.9rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border-radius: var(--radius-card);
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+    cursor: pointer;
+  }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-primary {
+    background-color: var(--color-bronze);
+    color: var(--color-ivory);
+  }
+  .btn-primary:hover:not(:disabled) { background-color: var(--color-bronze-dark); }
+
+  .btn-outline {
+    border: 1px solid var(--color-bronze);
+    color: var(--color-bronze);
+    background-color: transparent;
+  }
+  .btn-outline:hover:not(:disabled) {
+    background-color: var(--color-bronze);
+    color: var(--color-ivory);
+  }
+
+  /* Surtitre de section : petite capitale bronze au-dessus du titre serif. */
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--color-bronze);
+  }
+
+  /* Chiffres du back-office : sans-serif, chasse fixe.
+     Playfair est une serif d'affichage — élégante pour un titre, mais ses
+     chiffres à hauteur variable dansent d'une ligne à l'autre dans un tableau.
+     `tabular-nums` force une largeur identique pour tous les chiffres : les
+     montants d'une colonne s'alignent, et un compteur qui change de valeur ne
+     fait plus bouger la mise en page. C'est la convention des logiciels de
+     gestion, et elle se lit plus vite. */
+  /* L'ARCHE — signature formelle du Relais.
+     Le logo est un médaillon ; la maison accueille. On sommet donc les
+     photographies principales d'un arc plein cintre, comme une porte ou une
+     fenêtre. C'est le seul geste décoratif de la page : tout le reste est en
+     lignes droites et en espace blanc, conformément au CDC §5.1 (« ambiance
+     sobre, beaucoup de respiration »). Un motif tenu vaut mieux que trois. */
+  .arch {
+    border-top-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+    overflow: hidden;
+  }
+
+  /* Demi-arche : l'arc n'est porté que par un angle. Sert aux grandes images
+     de pleine hauteur, où un plein cintre serait démesuré. */
+  .arch-corner {
+    border-top-left-radius: 14rem;
+    overflow: hidden;
+  }
+
+  /* Pastille d'équipement. Angles quasi droits comme tout le reste du site —
+     une pastille arrondie aurait l'air empruntée à un autre système. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--color-ivory-line);
+    border-radius: var(--radius-card);
+    background-color: var(--color-cream);
+    font-size: 0.8rem;
+    color: var(--color-brown-soft);
+    white-space: nowrap;
+  }
+
+  /* Lettrine. Réservée à l'ouverture d'un récit — la page « Notre maison »
+     et rien d'autre. Elle signale qu'on entre dans un texte suivi, pas dans
+     une fiche technique, et donne à la serif du logo un moment de présence. */
+  .dropcap::first-letter {
+    font-family: var(--font-display);
+    font-size: 3.4em;
+    line-height: 0.82;
+    float: left;
+    padding-right: 0.09em;
+    padding-top: 0.04em;
+    color: var(--color-bronze);
+  }
+
+  /* Surtitre précédé d'un filet horizontal. Le trait ancre le mot dans la
+     largeur de la colonne et signale un début de section sans recourir à un
+     aplat de couleur — l'ivoire de la charte doit rester dominant. */
+  .eyebrow-rule {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .eyebrow-rule::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background-color: var(--color-bronze);
+    flex-shrink: 0;
+  }
+
+  .numeric {
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    letter-spacing: -0.015em;
+  }
+
+  .field {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    background-color: var(--color-cream);
+    border: 1px solid var(--color-ivory-line);
+    border-radius: var(--radius-card);
+    font-size: 0.95rem;
+    color: var(--color-brown);
+  }
+  .field:focus { border-color: var(--color-bronze); outline-offset: 0; }
+  .field::placeholder { color: color-mix(in srgb, var(--color-brown-soft) 60%, transparent); }
+}
+
+/* Respect des préférences système : aucune animation pour qui n'en veut pas. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

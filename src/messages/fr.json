@@ -1,0 +1,338 @@
+{
+  "meta": {
+    "siteName": "Hôtel Le Relais du Centre",
+    "baseline": "Le temps d'une pause",
+    "defaultDescription": "Hôtel Le Relais du Centre à Tiébissou : chambres et suites confortables, restaurant et bar, au cœur de la Côte d'Ivoire. Réservation en ligne."
+  },
+  "nav": {
+    "home": "Accueil",
+    "hotel": "Notre maison",
+    "rooms": "Chambres & Suites",
+    "services": "Services",
+    "gallery": "Galerie",
+    "contact": "Contact",
+    "book": "Réserver",
+    "menu": "Menu",
+    "close": "Fermer",
+    "language": "Langue",
+    "switchTo": "English",
+    "faq": "Questions fréquentes"
+  },
+  "common": {
+    "from": "À partir de",
+    "perNight": "/ nuit",
+    "night": "{count, plural, one {# nuit} other {# nuits}}",
+    "adults": "{count, plural, one {# adulte} other {# adultes}}",
+    "children": "{count, plural, one {# enfant} other {# enfants}}",
+    "discover": "Découvrir",
+    "seeMore": "En savoir plus",
+    "book": "Réserver",
+    "bookThisRoom": "Réserver cette chambre",
+    "call": "Appeler",
+    "whatsapp": "WhatsApp",
+    "loading": "Chargement…",
+    "backToRooms": "Retour aux chambres",
+    "demoNotice": "Visuels d'illustration — les photographies définitives de l'établissement seront intégrées avant la mise en ligne."
+  },
+  "home": {
+    "heroTitle": "Le Relais du Centre",
+    "heroSubtitle": "Tiébissou, au cœur de la Côte d'Ivoire",
+    "heroCta": "Vérifier les disponibilités",
+    "introEyebrow": "Bienvenue",
+    "introTitle": "Une halte, au centre de tout",
+    "introBody": "Sur la route qui relie le nord au sud du pays, Le Relais du Centre est cette adresse que l'on retient. On s'y arrête pour une nuit, on y revient pour quelques jours. Chambres calmes, table simple et généreuse, accueil qui prend le temps : ici, la pause n'est pas une contrainte de voyage, c'est un moment à part entière.",
+    "roomsEyebrow": "Nos hébergements",
+    "roomsTitle": "Chambres & Suites",
+    "roomsBody": "Quatre catégories, du confort essentiel à la suite avec terrasse privative. Toutes climatisées, toutes avec salle d'eau privative.",
+    "roomsCta": "Voir toutes les chambres",
+    "servicesEyebrow": "Sur place",
+    "servicesTitle": "Ce que vous trouverez ici",
+    "servicesBody": "Un restaurant ouvert midi et soir, un bar pour la fin de journée, un jardin où l'on respire. L'essentiel, bien fait.",
+    "servicesCta": "Découvrir les services",
+    "locationEyebrow": "Nous trouver",
+    "locationTitle": "À Tiébissou, sur l'axe central",
+    "locationBody": "À proximité immédiate des grands axes routiers du centre du pays, facile d'accès en voiture, avec stationnement sur place.",
+    "locationCta": "Nous contacter",
+    "bookEyebrow": "Réservation",
+    "bookTitle": "Réservez en trois étapes",
+    "bookBody": "Choisissez vos dates, laissez vos coordonnées, réglez l'acompte par Mobile Money. Vous recevez votre confirmation immédiatement.",
+    "heroKicker": "Tiébissou · Côte d'Ivoire",
+    "statRooms": "chambres",
+    "statCategories": "catégories",
+    "statReception": "réception",
+    "statReceptionValue": "24h/24",
+    "welcomeP2": "Nous tenons quatre catégories de chambres, une table ouverte midi et soir, et un jardin à l'écart de la route. Rien de spectaculaire : de l'attention, tenue tous les jours.",
+    "servicesLead": "Trois adresses dans la maison, ouvertes aux clients de l'hôtel comme aux visiteurs de passage.",
+    "locationAddress": "Sur l'axe central, à Tiébissou",
+    "locationHint": "Stationnement gratuit et surveillé sur place.",
+    "openMap": "Ouvrir dans Google Maps",
+    "depositNote": "Acompte de {percent} % pour confirmer, annulation sans frais jusqu'à {hours} heures avant l'arrivée."
+  },
+  "hotel": {
+    "title": "Notre maison",
+    "subtitle": "Notre histoire",
+    "lead": "Le Relais du Centre est né d'une idée simple : offrir, sur la route, une adresse où l'on se sent attendu.",
+    "storyTitle": "Une maison de passage devenue une adresse",
+    "storyBody": "Tiébissou occupe une place particulière sur la carte : c'est là que se croisent les trajets entre le nord et le sud, entre Abidjan et l'intérieur du pays. Il fallait à ce carrefour une maison qui sache accueillir aussi bien le voyageur pressé que la famille en route pour les fêtes, aussi bien la mission de travail que le séjour de quelques jours.\n\nNous avons voulu un lieu sobre et chaleureux, où chaque chambre est tenue avec soin et où l'on reconnaît les visages. Le confort d'un hôtel, l'attention d'une maison.",
+    "valuesTitle": "Ce à quoi nous tenons",
+    "value1Title": "L'accueil d'abord",
+    "value1Body": "Une réception présente, qui répond, qui oriente, qui connaît la région et sait où vous envoyer dîner.",
+    "value2Title": "Le calme",
+    "value2Body": "Des chambres tenues au silence, une cour intérieure et un jardin à l'écart du bruit de la route.",
+    "value3Title": "La régularité",
+    "value3Body": "La même propreté, le même service, la première nuit comme la dixième. C'est ce qui fait revenir.",
+    "quote": "Le temps d'une pause",
+    "quoteLead": "Ce qui se joue ici tient en une phrase.",
+    "valuesLead": "Trois choses que nous ne négocions pas, parce que ce sont elles qui font revenir.",
+    "figuresTitle": "En quelques mots"
+  },
+  "rooms": {
+    "title": "Chambres & Suites",
+    "subtitle": "Quatre catégories, un même soin",
+    "lead": "Toutes nos chambres sont climatisées et disposent d'une salle d'eau privative, du Wi-Fi et d'une télévision. Les tarifs s'entendent par nuit, petit-déjeuner inclus.",
+    "amenitiesTitle": "Équipements",
+    "detailsTitle": "En détail",
+    "surface": "Surface",
+    "bed": "Couchage",
+    "capacity": "Capacité",
+    "capacityValue": "{adults, plural, one {# adulte} other {# adultes}}{children, plural, =0 {} one { + # enfant} other { + # enfants}}",
+    "unitsAvailable": "{count, plural, =0 {Complet} one {Dernière chambre disponible} other {# chambres disponibles}}",
+    "checkAvailability": "Vérifier les disponibilités",
+    "notFound": "Cette catégorie de chambre n'existe pas ou n'est plus proposée.",
+    "galleryTitle": "En images",
+    "seeDetails": "Voir les détails",
+    "compareTitle": "Comparer les catégories",
+    "availabilityTitle": "Vos dates"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Sur place",
+    "lead": "Tout ce qu'il faut pour que l'étape soit agréable, sans avoir à reprendre la voiture.",
+    "restaurantTitle": "Le restaurant",
+    "restaurantBody": "Cuisine ivoirienne et plats européens, servis midi et soir. Une carte courte, des produits du marché, et un plat du jour qui change chaque matin. Ouvert aux clients de l'hôtel comme aux visiteurs de passage.",
+    "restaurantHours": "Déjeuner 12h — 15h · Dîner 19h — 22h30",
+    "barTitle": "Le bar",
+    "barBody": "Un comptoir pour la fin de journée, à l'ombre du jardin. Boissons fraîches, cafés, et de quoi grignoter en attendant le dîner.",
+    "barHours": "Ouvert de 10h à 23h",
+    "groundsTitle": "Le jardin",
+    "groundsBody": "Un espace vert à l'écart de la route, avec des tables à l'ombre. L'endroit où l'on prend son café le matin et où l'on laisse les enfants courir en fin d'après-midi.",
+    "practicalTitle": "Aspects pratiques",
+    "practical1": "Stationnement gratuit et surveillé",
+    "practical2": "Wi-Fi dans tout l'établissement",
+    "practical3": "Réception ouverte tous les jours",
+    "practical4": "Service de blanchisserie sur demande",
+    "practical5": "Arrivée à partir de {checkIn} · Départ jusqu'à {checkOut}",
+    "practical6": "Paiement Mobile Money et espèces"
+  },
+  "gallery": {
+    "title": "Galerie",
+    "subtitle": "L'établissement en images",
+    "lead": "Les chambres, la table, le jardin.",
+    "filterAll": "Tout",
+    "filterRooms": "Chambres",
+    "filterHotel": "L'hôtel",
+    "filterRestaurant": "Restauration",
+    "filterGrounds": "Le cadre"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Nous écrire",
+    "lead": "Une question sur une réservation, un séjour de groupe, un événement ? Écrivez-nous, nous répondons sous 24 heures.",
+    "infoTitle": "Coordonnées",
+    "phone": "Téléphone",
+    "email": "E-mail",
+    "address": "Adresse",
+    "hours": "Réception",
+    "hoursValue": "Tous les jours, 24h/24",
+    "formTitle": "Formulaire de contact",
+    "name": "Nom complet",
+    "emailField": "Adresse e-mail",
+    "phoneField": "Téléphone (facultatif)",
+    "subject": "Objet",
+    "message": "Votre message",
+    "send": "Envoyer le message",
+    "sending": "Envoi en cours…",
+    "success": "Merci, votre message est bien parti. Nous vous répondons sous 24 heures.",
+    "error": "Votre message n'a pas pu être envoyé. Vous pouvez nous joindre directement par téléphone ou WhatsApp.",
+    "mapTitle": "Nous situer"
+  },
+  "booking": {
+    "title": "Réserver",
+    "step": "Étape {current} sur {total}",
+    "step1": "Dates & chambre",
+    "step2": "Vos informations",
+    "step3": "Acompte",
+    "searchTitle": "Vos dates de séjour",
+    "checkIn": "Arrivée",
+    "checkOut": "Départ",
+    "adults": "Adultes",
+    "children": "Enfants",
+    "search": "Voir les disponibilités",
+    "searching": "Recherche…",
+    "resultsTitle": "Disponible pour {nights}",
+    "noResults": "Aucune chambre disponible pour ces dates. Essayez d'autres dates, ou contactez-nous directement : il nous arrive d'avoir des désistements.",
+    "soldOut": "Complet",
+    "closed": "Non disponible",
+    "capacityIssue": "Capacité insuffisante",
+    "select": "Choisir",
+    "selected": "Sélectionnée",
+    "summaryTitle": "Votre séjour",
+    "summaryRoom": "Chambre",
+    "summaryDates": "Dates",
+    "summaryGuests": "Voyageurs",
+    "summaryNights": "Durée",
+    "summaryTotal": "Total du séjour",
+    "summaryDeposit": "Acompte à régler maintenant",
+    "summaryBalance": "Solde à régler sur place",
+    "depositExplain": "Un acompte de {percent} % confirme votre réservation. Le solde se règle à l'arrivée.",
+    "detailsTitle": "Vos informations",
+    "detailsLead": "Ces informations nous servent à préparer votre arrivée et à vous envoyer votre confirmation.",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Adresse e-mail",
+    "phone": "Téléphone (WhatsApp de préférence)",
+    "country": "Pays de résidence",
+    "notes": "Demande particulière (facultatif)",
+    "notesPlaceholder": "Arrivée tardive, lit d'appoint, étage souhaité…",
+    "acceptTerms": "J'accepte les conditions de réservation et la politique d'annulation.",
+    "continue": "Continuer vers le paiement",
+    "back": "Retour",
+    "paymentTitle": "Règlement de l'acompte",
+    "paymentLead": "Votre chambre est réservée pour vous pendant {minutes} minutes, le temps de régler l'acompte.",
+    "holdRemaining": "Temps restant : {time}",
+    "holdExpired": "Le délai est écoulé et votre chambre a été remise à la vente. Vous pouvez relancer une réservation.",
+    "payWith": "Régler {amount} par Mobile Money",
+    "paymentMethods": "Orange Money · Wave · MTN Money · Moov Money",
+    "paymentSecure": "Paiement sécurisé — vous êtes redirigé vers notre prestataire agréé, puis ramené sur cette page.",
+    "paymentFailed": "Le paiement n'a pas abouti. Aucun montant n'a été débité. Vous pouvez réessayer tant que le délai n'est pas écoulé.",
+    "retry": "Réessayer le paiement",
+    "confirmedTitle": "Votre réservation est confirmée",
+    "confirmedLead": "Merci {firstName}. Votre confirmation part à l'instant par e-mail et par WhatsApp.",
+    "reference": "Référence",
+    "keepReference": "Conservez cette référence : elle suffit à retrouver votre réservation à la réception.",
+    "pendingTitle": "Réservation en attente de paiement",
+    "pendingLead": "Nous n'avons pas encore reçu la confirmation de votre paiement. Si vous venez de régler, cette page se mettra à jour dans quelques instants.",
+    "arrivalInfo": "Arrivée à partir de {checkIn}, départ jusqu'à {checkOut}.",
+    "cancellationInfo": "Annulation sans frais jusqu'à {hours} heures avant l'arrivée.",
+    "backHome": "Retour à l'accueil",
+    "errors": {
+      "INVALID_DATES": "Les dates saisies ne sont pas valides.",
+      "DATE_IN_PAST": "La date d'arrivée est déjà passée.",
+      "MIN_NIGHTS": "Le séjour minimum est d'une nuit.",
+      "MAX_NIGHTS": "Pour un séjour de plus de 30 nuits, contactez-nous directement.",
+      "TOO_FAR_AHEAD": "Les réservations sont ouvertes jusqu'à un an à l'avance.",
+      "CAPACITY_EXCEEDED": "Cette chambre ne peut pas accueillir autant de personnes.",
+      "ROOM_UNAVAILABLE": "Cette chambre vient d'être réservée par un autre visiteur. Choisissez une autre catégorie ou d'autres dates.",
+      "ROOM_TYPE_NOT_FOUND": "Cette catégorie de chambre n'est plus proposée.",
+      "INVALID_GUEST_DETAILS": "Merci de vérifier vos coordonnées.",
+      "HOLD_EXPIRED": "Le délai de paiement est écoulé et la chambre a été remise à la vente.",
+      "GENERIC": "Une erreur est survenue. Merci de réessayer ou de nous contacter directement."
+    }
+  },
+  "footer": {
+    "tagline": "Le temps d'une pause",
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "legalTitle": "Informations",
+    "legal": "Mentions légales",
+    "terms": "Conditions de réservation",
+    "privacy": "Politique de confidentialité",
+    "rights": "Tous droits réservés",
+    "madeBy": "Site réalisé par MapDevs"
+  },
+  "legal": {
+    "noticeTitle": "Mentions légales",
+    "termsTitle": "Conditions de réservation",
+    "privacyTitle": "Politique de confidentialité",
+    "placeholder": "Le contenu de cette page sera fourni par l'établissement avant la mise en ligne (cahier des charges §9)."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "cta": "Retour à l'accueil"
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "subtitle": "Bon à savoir",
+    "lead": "Les réponses aux questions qu'on nous pose le plus souvent. Si la vôtre n'y figure pas, écrivez-nous ou appelez la réception.",
+    "stillHere": "Vous ne trouvez pas votre réponse ?",
+    "stillHereBody": "La réception répond tous les jours, 24 heures sur 24.",
+    "groups": [
+      {
+        "title": "Réservation et paiement",
+        "items": [
+          {
+            "q": "Comment réserver une chambre ?",
+            "a": "En ligne, en trois étapes : vous choisissez vos dates et votre catégorie, vous laissez vos coordonnées, vous réglez l'acompte. La confirmation part immédiatement. Vous pouvez aussi appeler la réception ou nous écrire sur WhatsApp : nous enregistrons la réservation pour vous."
+          },
+          {
+            "q": "Dois-je payer la totalité à l'avance ?",
+            "a": "Non. Un acompte de {percent} % confirme la réservation, le solde se règle à l'arrivée."
+          },
+          {
+            "q": "Quels moyens de paiement acceptez-vous ?",
+            "a": "En ligne : Mobile Money — Orange Money, Wave, MTN Money et Moov Money. Sur place : Mobile Money et espèces."
+          },
+          {
+            "q": "Puis-je annuler ou modifier ma réservation ?",
+            "a": "L'annulation est sans frais jusqu'à {hours} heures avant l'arrivée. Pour une modification de dates, appelez la réception avec votre référence : c'est plus rapide que d'annuler et de recommencer."
+          },
+          {
+            "q": "Je n'ai pas reçu ma confirmation, que faire ?",
+            "a": "Vérifiez d'abord vos courriers indésirables. Si vous avez réglé et que rien n'arrive au bout de quelques minutes, appelez-nous avec la référence affichée à l'écran : nous retrouvons la réservation immédiatement."
+          }
+        ]
+      },
+      {
+        "title": "Votre séjour",
+        "items": [
+          {
+            "q": "À quelle heure puis-je arriver et repartir ?",
+            "a": "L'arrivée se fait à partir de {checkIn} et le départ jusqu'à {checkOut}. Si vous arrivez tard dans la nuit, prévenez-nous : la réception est ouverte 24 heures sur 24 et nous vous attendons."
+          },
+          {
+            "q": "Le petit-déjeuner est-il compris ?",
+            "a": "Oui, il est inclus dans tous nos tarifs."
+          },
+          {
+            "q": "Puis-je venir avec des enfants ?",
+            "a": "Bien sûr. La capacité varie selon la catégorie : elle est indiquée sur chaque fiche de chambre. La Chambre Familiale est prévue pour deux adultes et deux enfants."
+          },
+          {
+            "q": "Y a-t-il le Wi-Fi ?",
+            "a": "Oui, gratuitement et dans tout l'établissement, chambres comprises."
+          }
+        ]
+      },
+      {
+        "title": "Accès et services",
+        "items": [
+          {
+            "q": "Où se trouve exactement l'hôtel ?",
+            "a": "À Tiébissou, sur l'axe central qui relie le nord au sud du pays. Le stationnement est gratuit et surveillé sur place."
+          },
+          {
+            "q": "Y a-t-il un restaurant ?",
+            "a": "Oui, ouvert midi et soir, aux clients de l'hôtel comme aux visiteurs de passage. Le bar est ouvert de 10h à 23h."
+          },
+          {
+            "q": "Organisez-vous des séminaires ou des événements ?",
+            "a": "Pour un séjour de groupe ou un événement, contactez-nous directement : nous étudions chaque demande au cas par cas."
+          }
+        ]
+      }
+    ]
+  },
+  "assistant": {
+    "open": "Une question ?",
+    "title": "Assistant du Relais",
+    "intro": "Choisissez une question — les réponses sont écrites par l'équipe de l'hôtel. Pour tout le reste, nous sommes joignables directement.",
+    "close": "Fermer",
+    "back": "Retour aux questions",
+    "whatsapp": "Écrire sur WhatsApp",
+    "call": "Appeler la réception",
+    "book": "Réserver une chambre",
+    "allFaq": "Voir toutes les questions",
+    "notice": "Réponses préenregistrées. Aucun conseiller n'est en ligne : pour un échange, passez par WhatsApp ou par téléphone."
+  }
+}

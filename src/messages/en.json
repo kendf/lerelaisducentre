@@ -1,0 +1,338 @@
+{
+  "meta": {
+    "siteName": "Le Relais du Centre Hotel",
+    "baseline": "Le temps d'une pause",
+    "defaultDescription": "Le Relais du Centre in Tiébissou: comfortable rooms and suites, restaurant and bar, in the heart of Côte d'Ivoire. Book online."
+  },
+  "nav": {
+    "home": "Home",
+    "hotel": "Our house",
+    "rooms": "Rooms & Suites",
+    "services": "Services",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "book": "Book",
+    "menu": "Menu",
+    "close": "Close",
+    "language": "Language",
+    "switchTo": "Français",
+    "faq": "FAQ"
+  },
+  "common": {
+    "from": "From",
+    "perNight": "/ night",
+    "night": "{count, plural, one {# night} other {# nights}}",
+    "adults": "{count, plural, one {# adult} other {# adults}}",
+    "children": "{count, plural, one {# child} other {# children}}",
+    "discover": "Discover",
+    "seeMore": "Learn more",
+    "book": "Book",
+    "bookThisRoom": "Book this room",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "loading": "Loading…",
+    "backToRooms": "Back to rooms",
+    "demoNotice": "Illustrative images — the hotel's final photographs will be added before launch."
+  },
+  "home": {
+    "heroTitle": "Le Relais du Centre",
+    "heroSubtitle": "Tiébissou, in the heart of Côte d'Ivoire",
+    "heroCta": "Check availability",
+    "introEyebrow": "Welcome",
+    "introTitle": "A stop at the centre of everything",
+    "introBody": "On the road linking the north of the country to the south, Le Relais du Centre is the address people remember. Some stop for a night, others come back for several days. Quiet rooms, a simple and generous table, a welcome that takes its time: here, the pause is not a constraint of travel — it is part of the journey.",
+    "roomsEyebrow": "Where you'll stay",
+    "roomsTitle": "Rooms & Suites",
+    "roomsBody": "Four categories, from essential comfort to a suite with its own terrace. All air-conditioned, all with a private bathroom.",
+    "roomsCta": "See all rooms",
+    "servicesEyebrow": "On site",
+    "servicesTitle": "What you'll find here",
+    "servicesBody": "A restaurant open for lunch and dinner, a bar for the end of the day, a garden to breathe in. The essentials, done well.",
+    "servicesCta": "Explore our services",
+    "locationEyebrow": "Finding us",
+    "locationTitle": "In Tiébissou, on the central route",
+    "locationBody": "Right beside the main roads of central Côte d'Ivoire, easy to reach by car, with parking on site.",
+    "locationCta": "Get in touch",
+    "bookEyebrow": "Booking",
+    "bookTitle": "Book in three steps",
+    "bookBody": "Choose your dates, leave your details, pay the deposit by Mobile Money. Your confirmation arrives straight away.",
+    "heroKicker": "Tiébissou · Côte d'Ivoire",
+    "statRooms": "rooms",
+    "statCategories": "categories",
+    "statReception": "front desk",
+    "statReceptionValue": "24 hours",
+    "welcomeP2": "We keep four room categories, a table open at lunch and dinner, and a garden set back from the road. Nothing spectacular: attention, held to every day.",
+    "servicesLead": "Three addresses within the house, open to hotel guests and passing visitors alike.",
+    "locationAddress": "On the central route, in Tiébissou",
+    "locationHint": "Free, supervised parking on site.",
+    "openMap": "Open in Google Maps",
+    "depositNote": "A {percent}% deposit confirms your booking, free cancellation up to {hours} hours before arrival."
+  },
+  "hotel": {
+    "title": "Our house",
+    "subtitle": "Our story",
+    "lead": "Le Relais du Centre grew from a simple idea: to offer, along the road, a place where you feel expected.",
+    "storyTitle": "A stopping house that became an address",
+    "storyBody": "Tiébissou holds a particular place on the map: it is where the journeys between north and south, between Abidjan and the interior, cross paths. Such a crossroads needed a house able to welcome the traveller in a hurry as readily as the family driving home for the holidays, the work assignment as readily as the stay of a few days.\n\nWe wanted somewhere understated and warm, where every room is kept with care and where faces are remembered. The comfort of a hotel, the attention of a home.",
+    "valuesTitle": "What matters to us",
+    "value1Title": "Welcome, first",
+    "value1Body": "A front desk that is present, that answers, that knows the region and where to send you for dinner.",
+    "value2Title": "Quiet",
+    "value2Body": "Rooms kept peaceful, an inner courtyard and a garden set back from the noise of the road.",
+    "value3Title": "Consistency",
+    "value3Body": "The same cleanliness, the same service, on the first night as on the tenth. That is what brings people back.",
+    "quote": "Le temps d'une pause",
+    "quoteLead": "What matters here fits in one line.",
+    "valuesLead": "Three things we do not compromise on, because they are what brings people back.",
+    "figuresTitle": "In brief"
+  },
+  "rooms": {
+    "title": "Rooms & Suites",
+    "subtitle": "Four categories, one standard of care",
+    "lead": "All our rooms are air-conditioned and have a private bathroom, Wi-Fi and a television. Rates are per night, breakfast included.",
+    "amenitiesTitle": "Amenities",
+    "detailsTitle": "Details",
+    "surface": "Size",
+    "bed": "Bedding",
+    "capacity": "Capacity",
+    "capacityValue": "{adults, plural, one {# adult} other {# adults}}{children, plural, =0 {} one { + # child} other { + # children}}",
+    "unitsAvailable": "{count, plural, =0 {Fully booked} one {Last room available} other {# rooms available}}",
+    "checkAvailability": "Check availability",
+    "notFound": "This room category does not exist or is no longer offered.",
+    "galleryTitle": "In pictures",
+    "seeDetails": "See details",
+    "compareTitle": "Compare the categories",
+    "availabilityTitle": "Your dates"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "On site",
+    "lead": "Everything you need to make the stop a pleasant one, without getting back in the car.",
+    "restaurantTitle": "The restaurant",
+    "restaurantBody": "Ivorian cooking and European dishes, served at lunch and dinner. A short menu, market produce, and a dish of the day that changes every morning. Open to hotel guests and passing visitors alike.",
+    "restaurantHours": "Lunch 12pm — 3pm · Dinner 7pm — 10.30pm",
+    "barTitle": "The bar",
+    "barBody": "A counter for the end of the day, in the shade of the garden. Cold drinks, coffee, and something to nibble while dinner is prepared.",
+    "barHours": "Open 10am to 11pm",
+    "groundsTitle": "The garden",
+    "groundsBody": "A green space away from the road, with tables in the shade. Where you take your morning coffee and where children run in the late afternoon.",
+    "practicalTitle": "Practical information",
+    "practical1": "Free, supervised parking",
+    "practical2": "Wi-Fi throughout the property",
+    "practical3": "Front desk open every day",
+    "practical4": "Laundry service on request",
+    "practical5": "Check-in from {checkIn} · Check-out until {checkOut}",
+    "practical6": "Mobile Money and cash accepted"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "The property in pictures",
+    "lead": "The rooms, the table, the garden.",
+    "filterAll": "All",
+    "filterRooms": "Rooms",
+    "filterHotel": "The hotel",
+    "filterRestaurant": "Dining",
+    "filterGrounds": "The grounds"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Write to us",
+    "lead": "A question about a booking, a group stay, an event? Write to us — we reply within 24 hours.",
+    "infoTitle": "Details",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "hours": "Front desk",
+    "hoursValue": "Every day, 24 hours",
+    "formTitle": "Contact form",
+    "name": "Full name",
+    "emailField": "Email address",
+    "phoneField": "Phone (optional)",
+    "subject": "Subject",
+    "message": "Your message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "success": "Thank you, your message is on its way. We reply within 24 hours.",
+    "error": "Your message could not be sent. You can reach us directly by phone or WhatsApp.",
+    "mapTitle": "Where we are"
+  },
+  "booking": {
+    "title": "Book",
+    "step": "Step {current} of {total}",
+    "step1": "Dates & room",
+    "step2": "Your details",
+    "step3": "Deposit",
+    "searchTitle": "Your stay",
+    "checkIn": "Arrival",
+    "checkOut": "Departure",
+    "adults": "Adults",
+    "children": "Children",
+    "search": "Show availability",
+    "searching": "Searching…",
+    "resultsTitle": "Available for {nights}",
+    "noResults": "No rooms available for these dates. Try other dates, or contact us directly — cancellations do happen.",
+    "soldOut": "Fully booked",
+    "closed": "Unavailable",
+    "capacityIssue": "Not enough capacity",
+    "select": "Select",
+    "selected": "Selected",
+    "summaryTitle": "Your stay",
+    "summaryRoom": "Room",
+    "summaryDates": "Dates",
+    "summaryGuests": "Guests",
+    "summaryNights": "Length",
+    "summaryTotal": "Stay total",
+    "summaryDeposit": "Deposit due now",
+    "summaryBalance": "Balance due on arrival",
+    "depositExplain": "A {percent}% deposit confirms your booking. The balance is settled on arrival.",
+    "detailsTitle": "Your details",
+    "detailsLead": "We use these details to prepare your arrival and to send your confirmation.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "phone": "Phone (WhatsApp preferred)",
+    "country": "Country of residence",
+    "notes": "Special request (optional)",
+    "notesPlaceholder": "Late arrival, extra bed, preferred floor…",
+    "acceptTerms": "I accept the booking terms and the cancellation policy.",
+    "continue": "Continue to payment",
+    "back": "Back",
+    "paymentTitle": "Deposit payment",
+    "paymentLead": "Your room is held for you for {minutes} minutes, the time to pay the deposit.",
+    "holdRemaining": "Time remaining: {time}",
+    "holdExpired": "The hold has expired and your room has been released. You can start a new booking.",
+    "payWith": "Pay {amount} by Mobile Money",
+    "paymentMethods": "Orange Money · Wave · MTN Money · Moov Money",
+    "paymentSecure": "Secure payment — you are redirected to our licensed provider, then returned to this page.",
+    "paymentFailed": "The payment did not go through. Nothing has been charged. You can try again while the hold lasts.",
+    "retry": "Try the payment again",
+    "confirmedTitle": "Your booking is confirmed",
+    "confirmedLead": "Thank you {firstName}. Your confirmation is being sent by email and WhatsApp.",
+    "reference": "Reference",
+    "keepReference": "Keep this reference: it is all the front desk needs to find your booking.",
+    "pendingTitle": "Booking awaiting payment",
+    "pendingLead": "We have not yet received confirmation of your payment. If you have just paid, this page will update in a few moments.",
+    "arrivalInfo": "Check-in from {checkIn}, check-out until {checkOut}.",
+    "cancellationInfo": "Free cancellation up to {hours} hours before arrival.",
+    "backHome": "Back to home",
+    "errors": {
+      "INVALID_DATES": "The dates entered are not valid.",
+      "DATE_IN_PAST": "The arrival date has already passed.",
+      "MIN_NIGHTS": "The minimum stay is one night.",
+      "MAX_NIGHTS": "For stays longer than 30 nights, please contact us directly.",
+      "TOO_FAR_AHEAD": "Bookings open up to one year ahead.",
+      "CAPACITY_EXCEEDED": "This room cannot accommodate that many guests.",
+      "ROOM_UNAVAILABLE": "This room has just been booked by another visitor. Please choose another category or other dates.",
+      "ROOM_TYPE_NOT_FOUND": "This room category is no longer offered.",
+      "INVALID_GUEST_DETAILS": "Please check your contact details.",
+      "HOLD_EXPIRED": "The payment window has expired and the room has been released.",
+      "GENERIC": "Something went wrong. Please try again or contact us directly."
+    }
+  },
+  "footer": {
+    "tagline": "Le temps d'une pause",
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "legalTitle": "Information",
+    "legal": "Legal notice",
+    "terms": "Booking terms",
+    "privacy": "Privacy policy",
+    "rights": "All rights reserved",
+    "madeBy": "Website by MapDevs"
+  },
+  "legal": {
+    "noticeTitle": "Legal notice",
+    "termsTitle": "Booking terms",
+    "privacyTitle": "Privacy policy",
+    "placeholder": "The content of this page will be supplied by the hotel before launch (specification §9)."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or has been moved.",
+    "cta": "Back to home"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Good to know",
+    "lead": "Answers to the questions we are asked most often. If yours is not here, write to us or call the front desk.",
+    "stillHere": "Can't find your answer?",
+    "stillHereBody": "The front desk answers every day, around the clock.",
+    "groups": [
+      {
+        "title": "Booking and payment",
+        "items": [
+          {
+            "q": "How do I book a room?",
+            "a": "Online, in three steps: choose your dates and category, leave your details, pay the deposit. Confirmation is sent straight away. You can also call the front desk or message us on WhatsApp — we will record the booking for you."
+          },
+          {
+            "q": "Do I have to pay in full in advance?",
+            "a": "No. A {percent}% deposit confirms the booking; the balance is settled on arrival."
+          },
+          {
+            "q": "Which payment methods do you accept?",
+            "a": "Online: Mobile Money — Orange Money, Wave, MTN Money and Moov Money. On site: Mobile Money and cash."
+          },
+          {
+            "q": "Can I cancel or change my booking?",
+            "a": "Cancellation is free of charge up to {hours} hours before arrival. To change dates, call the front desk with your reference — it is quicker than cancelling and starting again."
+          },
+          {
+            "q": "I have not received my confirmation. What should I do?",
+            "a": "Check your spam folder first. If you have paid and nothing arrives after a few minutes, call us with the reference shown on screen: we will find the booking immediately."
+          }
+        ]
+      },
+      {
+        "title": "Your stay",
+        "items": [
+          {
+            "q": "What are the check-in and check-out times?",
+            "a": "Check-in from {checkIn}, check-out until {checkOut}. If you are arriving late at night, let us know: the front desk is open around the clock and we will be expecting you."
+          },
+          {
+            "q": "Is breakfast included?",
+            "a": "Yes, it is included in all our rates."
+          },
+          {
+            "q": "Can I come with children?",
+            "a": "Of course. Capacity varies by category and is shown on each room page. The Family Room is designed for two adults and two children."
+          },
+          {
+            "q": "Is there Wi-Fi?",
+            "a": "Yes, free of charge and throughout the property, rooms included."
+          }
+        ]
+      },
+      {
+        "title": "Getting here and services",
+        "items": [
+          {
+            "q": "Where exactly is the hotel?",
+            "a": "In Tiébissou, on the central route linking the north of the country to the south. Parking is free and supervised on site."
+          },
+          {
+            "q": "Is there a restaurant?",
+            "a": "Yes, open at lunch and dinner, to hotel guests and passing visitors alike. The bar is open from 10am to 11pm."
+          },
+          {
+            "q": "Do you host seminars or events?",
+            "a": "For a group stay or an event, contact us directly: we look at each request individually."
+          }
+        ]
+      }
+    ]
+  },
+  "assistant": {
+    "open": "A question?",
+    "title": "Le Relais assistant",
+    "intro": "Pick a question — the answers are written by the hotel team. For anything else, you can reach us directly.",
+    "close": "Close",
+    "back": "Back to questions",
+    "whatsapp": "Message us on WhatsApp",
+    "call": "Call the front desk",
+    "book": "Book a room",
+    "allFaq": "See all questions",
+    "notice": "Pre-written answers. No adviser is online: for a conversation, use WhatsApp or the phone."
+  }
+}
