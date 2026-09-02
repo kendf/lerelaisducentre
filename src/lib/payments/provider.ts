@@ -39,6 +39,12 @@ export interface PaymentInitResult {
   paymentUrl: string;
   /** Identifiant de transaction côté prestataire. */
   providerRef: string;
+  /**
+   * Jeton à conserver pour authentifier la notification à venir.
+   * Présent chez les prestataires qui vérifient par secret partagé plutôt que
+   * par signature — CinetPay v1 notamment. À stocker, jamais à exposer.
+   */
+  notifyToken?: string;
 }
 
 export interface PaymentEvent {
@@ -55,9 +61,25 @@ export type WebhookResult =
   | { ok: true; event: PaymentEvent }
   | { ok: false; reason: string };
 
+/** Contexte d'une transaction, retrouvé à partir de notre propre référence. */
+export interface WebhookContext {
+  reservationId: string;
+  notifyToken: string | null;
+}
+
 export interface WebhookRequest {
   headers: Headers;
   rawBody: string;
+  /**
+   * Retrouve le contexte d'une transaction à partir de la référence marchand.
+   *
+   * Certains prestataires n'identifient la notification que par NOTRE
+   * référence, et leur vérification exige un jeton conservé à l'initialisation.
+   * L'adaptateur a donc besoin de consulter la base — mais il ne doit pas la
+   * connaître. La route lui fournit cette fonction, et lui seul décide s'il
+   * en a l'usage.
+   */
+  lookup?: (merchantReference: string) => Promise<WebhookContext | null>;
 }
 
 export interface PaymentProvider {

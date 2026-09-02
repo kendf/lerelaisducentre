@@ -43,9 +43,36 @@ export async function POST(
     return NextResponse.json({ error: "PROVIDER_MISMATCH" }, { status: 404 });
   }
 
+  // Le service client est nécessaire avant même la vérification : certains
+  // prestataires n'identifient la notification que par NOTRE référence, et
+  // leur contrôle d'authenticité exige un jeton conservé à l'initialisation.
+  const supabase = createServiceClient();
+
   const result = await provider.verifyWebhook({
     headers: request.headers,
     rawBody,
+    async lookup(merchantReference) {
+      const { data } = await supabase
+        .from("reservations")
+        .select("id, payments(notify_token, created_at)")
+        .eq("reference", merchantReference)
+        .maybeSingle();
+
+      if (!data) return null;
+
+      // Le jeton de la tentative la PLUS RÉCENTE : un client qui relance son
+      // paiement après un échec obtient un nouveau jeton, et c'est celui-là
+      // que porte la notification.
+      const attempts = (data.payments ?? []) as Array<{
+        notify_token: string | null;
+        created_at: string;
+      }>;
+      const latest = attempts
+        .filter((a) => a.notify_token)
+        .sort((a, b) => b.created_at.localeCompare(a.created_at))[0];
+
+      return { reservationId: data.id, notifyToken: latest?.notify_token ?? null };
+    },
   });
 
   if (!result.ok) {
@@ -56,7 +83,6 @@ export async function POST(
   }
 
   const event = result.event;
-  const supabase = createServiceClient();
 
   if (event.status === "failed") {
     await supabase.rpc("fail_reservation_payment", {

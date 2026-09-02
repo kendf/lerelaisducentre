@@ -90,6 +90,9 @@ export async function startPayment(
       reservation_id: reservation.id,
       provider: provider.name,
       provider_ref: init.providerRef,
+      // Conservé pour authentifier la notification à venir : sans lui, une
+      // requête forgée sur l'URL publique du webhook serait indiscernable.
+      notify_token: init.notifyToken ?? null,
       amount_xof: reservation.deposit_amount_xof,
       status: "initiated",
       // Horodatée : chaque tentative laisse sa propre trace. Si un client
