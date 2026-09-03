@@ -63,10 +63,15 @@ export async function startPayment(
   }
 
   const siteUrl = getSiteUrl();
-  const provider = getPaymentProvider();
 
   let paymentUrl: string;
   try {
+    // La fabrique est DANS le try. Une variable d'environnement mal réglée est
+    // une erreur d'exploitation : elle ne doit pas se traduire par un écran
+    // d'erreur brut devant un client sur le point de payer. Elle est
+    // journalisée côté serveur, et le tunnel affiche un message exploitable.
+    const provider = getPaymentProvider();
+
     const init = await provider.initPayment({
       reservationId: reservation.id,
       reference: reservation.reference,
