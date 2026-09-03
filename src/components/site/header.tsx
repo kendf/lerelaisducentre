@@ -9,6 +9,10 @@ import { cn } from "@/lib/utils";
 import type { StaticPathname } from "@/i18n/routing";
 
 const LINKS: Array<{ href: StaticPathname; key: string }> = [
+  // Le logo ramène à l'accueil, mais rien ne l'annonce : un visiteur qui a
+  // quitté la page d'accueil n'a aucun repère nommé pour y revenir. Le lien
+  // est donc explicite, en tête de la barre.
+  { href: "/", key: "home" },
   { href: "/chambres", key: "rooms" },
   { href: "/services", key: "services" },
   { href: "/galerie", key: "gallery" },
@@ -32,7 +36,11 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ivory-line bg-ivory/95 backdrop-blur">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 lg:px-8">
+      {/* Pleine largeur, sans conteneur centré : le nom de l'établissement et
+          les actions se calent sur les bords de l'écran, seuls les liens de
+          pages restent au centre. Un en-tête de 1150 px flottant au milieu
+          d'un écran de 1900 laisse deux vides latéraux que rien ne justifie. */}
+      <div className="flex h-20 items-center justify-between gap-6 px-5">
         <Link
           href="/"
           className="flex flex-col leading-none"
@@ -44,7 +52,7 @@ export function Header() {
           <span className="signature text-base lg:text-lg">{tMeta("baseline")}</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label={t("menu")}>
+        <nav className="hidden items-center gap-7 lg:flex" aria-label={t("menu")}>
           {LINKS.map((link) => (
             <Link
               key={link.href}

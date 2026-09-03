@@ -114,7 +114,7 @@ export default async function HomePage({
           la maison avant de parler d'elle.
           ===================================================================== */}
       <section className="grid lg:min-h-[86svh] lg:grid-cols-[minmax(0,47%)_1fr]">
-        <div className="order-2 flex flex-col justify-center px-5 py-16 lg:order-1 lg:px-14 lg:py-20">
+        <div className="order-2 flex flex-col justify-center px-5 py-12 lg:order-1 lg:px-14 lg:py-16">
           <p className="eyebrow eyebrow-rule">{t("heroKicker")}</p>
 
           <h1
@@ -152,7 +152,7 @@ export default async function HomePage({
       {/* =====================================================================
           2. LA PAUSE — une bande presque vide
           ===================================================================== */}
-      <section className="border-y border-ivory-line bg-ivory-deep px-5 py-20 text-center lg:py-24">
+      <section className="border-y border-ivory-line bg-ivory-deep px-5 py-14 text-center lg:py-16">
         <p className="mx-auto max-w-2xl font-display text-2xl leading-relaxed text-balance sm:text-3xl">
           {t("introTitle")}
         </p>

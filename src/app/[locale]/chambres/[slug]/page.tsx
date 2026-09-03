@@ -62,10 +62,18 @@ export default async function RoomDetailPage({
   const tCommon = await getTranslations("common");
   const tHome = await getTranslations("home");
 
-  const [photos, settings] = await Promise.all([
-    getMedia({ roomTypeId: room.id }),
+  // Une seule requête pour TOUS les visuels de chambres, plutôt qu'une par
+  // catégorie : la page en a besoin deux fois — la galerie de cette chambre,
+  // et les vignettes des autres en bas de page. Les 24 visuels du catalogue
+  // tiennent dans une réponse ; trois requêtes de plus ne se justifieraient pas.
+  const [roomMedia, allRooms, settings] = await Promise.all([
+    getMedia({ section: "room" }),
+    getRoomTypes(),
     getPublicSettings(),
   ]);
+
+  const photos = roomMedia.filter((m) => m.room_type_id === room.id);
+  const others = allRooms.filter((r) => r.id !== room.id);
 
   const c = room.content[lang] ?? room.content.fr;
   const cover = photos.find((m) => m.is_cover) ?? photos[0];
@@ -94,7 +102,7 @@ export default async function RoomDetailPage({
   return (
     <>
       {/* --- Titre et faits ------------------------------------------------- */}
-      <section className="mx-auto max-w-5xl px-5 pt-16 lg:px-8 lg:pt-20">
+      <section className="mx-auto max-w-5xl px-5 pt-12 lg:px-8 lg:pt-14">
         <Link
           href="/chambres"
           className="inline-flex items-center gap-2 text-sm text-brown-soft transition-colors hover:text-bronze"
@@ -246,6 +254,60 @@ export default async function RoomDetailPage({
                 </div>
               ) : null}
             </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* --- Autres chambres --------------------------------------------------
+          Une fiche de chambre est une impasse : le visiteur que cette catégorie
+          ne convainc pas doit remonter jusqu'à la navigation, puis rouvrir la
+          liste. Les autres catégories sont donc posées ici, en fin de parcours,
+          au moment exact où la question « et les autres ? » se pose.
+          -------------------------------------------------------------------- */}
+      {others.length > 0 ? (
+        <section className="border-t border-ivory-line py-section">
+          <div className="mx-auto max-w-5xl px-5 lg:px-8">
+            <h2 className="text-2xl">{t("otherRooms")}</h2>
+
+            <ul className="mt-9 grid gap-8 sm:grid-cols-3">
+              {others.map((other) => {
+                const oc = other.content[lang] ?? other.content.fr;
+                const otherPhotos = roomMedia.filter(
+                  (m) => m.room_type_id === other.id
+                );
+                const otherCover =
+                  otherPhotos.find((m) => m.is_cover) ?? otherPhotos[0];
+
+                return (
+                  <li key={other.id}>
+                    <Link
+                      href={{
+                        pathname: "/chambres/[slug]",
+                        params: { slug: other.slug },
+                      }}
+                      className="group block text-center"
+                    >
+                      <div className="arch aspect-3/4 bg-ivory-line">
+                        {otherCover ? (
+                          <HotelImage
+                            basePath={otherCover.storage_path}
+                            alt=""
+                            sizes="(min-width: 640px) 33vw, 100vw"
+                            className="transition-transform duration-700 group-hover:scale-[1.04]"
+                          />
+                        ) : null}
+                      </div>
+                      <p className="mt-5 font-display text-lg transition-colors group-hover:text-bronze">
+                        {oc.name}
+                      </p>
+                      <p className="numeric mt-1 text-sm text-brown-soft">
+                        {formatXof(other.base_price_xof, lang)}
+                      </p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
       ) : null}

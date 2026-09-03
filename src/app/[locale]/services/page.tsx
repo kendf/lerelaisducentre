@@ -4,6 +4,7 @@ import { Car, Clock, CreditCard, Shirt, Sparkles, Wifi } from "lucide-react";
 
 import { HotelImage } from "@/components/site/hotel-image";
 import { getPublicSettings } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 export const revalidate = 300;
 
@@ -26,9 +27,20 @@ export async function generateMetadata({
    Elle est construite comme la visite d'une maison :
      - un TRIPTYQUE d'ouverture qui sert d'index — trois arches, trois noms,
        trois ancres. On choisit par où commencer ;
-     - puis chaque lieu occupe une bande pleine largeur, avec son texte posé
-       dans un panneau crème qui remonte sur la photographie. Le panneau donne
-       à chaque lieu son moment, sans le réduire à une colonne.
+     - puis chaque lieu occupe une bande CONTENUE, image d'un côté, texte de
+       l'autre, en alternance.
+
+   POURQUOI PLUS DE PLEINE LARGEUR ICI. La version précédente posait un panneau
+   crème remonté de -4 rem sur une photographie pleine largeur. L'image était
+   en position absolue dans un conteneur positionné, le panneau ne l'était pas :
+   l'image se peignait donc PAR-DESSUS le texte et coupait le titre de chaque
+   lieu. Le défaut n'était pas dans le chevauchement lui-même mais dans l'ordre
+   d'empilement — et un chevauchement qui dépend d'un z-index implicite est une
+   figure fragile, qui se recasse à la première modification.
+
+   La composition contenue supprime la cause plutôt que le symptôme : plus
+   aucun élément ne passe devant un autre. Elle raccourcit aussi la page d'un
+   tiers, ce que la lecture au défilement gagne directement.
    ============================================================================= */
 
 export default async function ServicesPage({
@@ -86,7 +98,7 @@ export default async function ServicesPage({
 
   return (
     <>
-      <section className="mx-auto max-w-3xl px-5 pt-20 pb-14 text-center lg:pt-28">
+      <section className="mx-auto max-w-3xl px-5 pt-14 pb-10 text-center lg:pt-20">
         <p className="eyebrow">{t("subtitle")}</p>
         <h1 className="mt-6 font-display text-4xl leading-[1.1] text-balance sm:text-5xl">
           {t("title")}
@@ -99,7 +111,7 @@ export default async function ServicesPage({
       {/* --- Triptyque d'ouverture, qui sert d'index ------------------------ */}
       <nav
         aria-label={t("title")}
-        className="mx-auto max-w-5xl px-5 pb-section lg:px-8"
+        className="mx-auto max-w-5xl px-5 pb-4 lg:px-8"
       >
         <ul className="grid gap-8 sm:grid-cols-3">
           {venues.map((venue) => (
@@ -122,39 +134,53 @@ export default async function ServicesPage({
         </ul>
       </nav>
 
-      {/* --- Chaque lieu, en bande pleine largeur ---------------------------- */}
-      {venues.map((venue) => (
-        <section
-          key={venue.id}
-          id={venue.id}
-          className="scroll-mt-24 border-t border-ivory-line"
-        >
-          <div className="relative h-[46vh] min-h-[300px] w-full overflow-hidden">
-            <HotelImage
-              basePath={venue.cover}
-              alt=""
-              sizes="100vw"
-              className="absolute inset-0"
-            />
-          </div>
+      {/* --- Chaque lieu : image et texte côte à côte, en alternance -------- */}
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        {venues.map((venue, index) => (
+          <div key={venue.id}>
+            {/* Le filet ne sépare que deux lieux : il marque une série, il
+                n'ouvre ni ne ferme la page. */}
+            {index > 0 ? (
+              <div className="rule-mark" aria-hidden="true">
+                <i />
+              </div>
+            ) : null}
 
-          {/* Le panneau remonte sur la photographie : c'est ce chevauchement
-              qui relie le lieu à son texte, plutôt qu'une simple succession. */}
-          <div className="mx-auto -mt-16 max-w-3xl px-5 pb-section lg:px-8">
-            <div className="border border-ivory-line bg-cream px-7 py-9 sm:px-10 sm:py-11">
-              <h2 className="text-3xl">{venue.title}</h2>
-              <p className="mt-5 text-[17px] leading-relaxed text-brown-soft">
-                {venue.body}
-              </p>
-              {venue.hours ? (
-                <p className="mt-6 border-t border-ivory-line pt-5 text-xs uppercase tracking-[0.14em] text-bronze">
-                  {venue.hours}
-                </p>
-              ) : null}
-            </div>
+            <section id={venue.id} className="scroll-mt-28 py-12 lg:py-16">
+              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
+                <div
+                  className={cn(
+                    "lg:col-span-7",
+                    // L'alternance évite la colonne unique qui donnerait à la
+                    // page un rythme de catalogue.
+                    index % 2 === 1 && "lg:order-2"
+                  )}
+                >
+                  <div className="aspect-16/10 overflow-hidden bg-ivory-line">
+                    <HotelImage
+                      basePath={venue.cover}
+                      alt=""
+                      sizes="(min-width: 1024px) 58vw, 100vw"
+                    />
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5">
+                  <h2 className="text-3xl">{venue.title}</h2>
+                  <p className="mt-5 text-[17px] leading-relaxed text-brown-soft">
+                    {venue.body}
+                  </p>
+                  {venue.hours ? (
+                    <p className="mt-6 border-t border-ivory-line pt-5 text-xs tracking-[0.14em] text-bronze uppercase">
+                      {venue.hours}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
-      ))}
+        ))}
+      </div>
 
       {/* --- Aspects pratiques ----------------------------------------------- */}
       <section className="border-t border-ivory-line bg-ivory-deep py-section">

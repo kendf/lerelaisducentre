@@ -51,7 +51,7 @@ export default async function GalleryPage({
       {/* Ouverture typographique : sur une page de photographies, une image de
           plus en tête ne dirait rien — elle entrerait en concurrence avec la
           planche elle-même. */}
-      <section className="mx-auto max-w-3xl px-5 pt-20 pb-12 text-center lg:pt-28">
+      <section className="mx-auto max-w-3xl px-5 pt-14 pb-9 text-center lg:pt-20">
         <p className="eyebrow">{t("subtitle")}</p>
         <h1 className="mt-6 font-display text-4xl leading-[1.1] text-balance sm:text-5xl">
           {t("title")}

@@ -41,7 +41,12 @@
   --font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
 
   /* --- Rythme -------------------------------------------------------------- */
-  --spacing-section: 5.5rem;     /* « beaucoup d'espace blanc » — CDC §5.1 */
+  /* Respiration entre les sections. Descendu de 5,5 à 4 rem : le CDC §5.1
+     demande « beaucoup d'espace blanc », pas des pages qu'il faut faire
+     défiler longuement pour passer d'une idée à la suivante. Sur mobile,
+     5,5 rem entre chaque bloc obligeait à trois gestes de défilement pour
+     traverser une section vide. */
+  --spacing-section: 4rem;
   --radius-card: 2px;            /* angles quasi droits : registre classique */
 }
 
@@ -90,6 +95,30 @@
     font-weight: 400;
     line-height: 1.1;
     color: var(--color-bronze);
+  }
+
+/* Filet de séparation entre deux blocs de même nature : un trait interrompu
+     en son milieu par un losange de bronze. Il reprend le vocabulaire du
+     médaillon sans le répéter, et il ANNONCE quelque chose — on ne le pose
+     qu'entre deux éléments d'une même série, jamais en simple décor. */
+  .rule-mark {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .rule-mark::before,
+  .rule-mark::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--color-ivory-line);
+  }
+  .rule-mark > i {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    transform: rotate(45deg);
+    border: 1px solid var(--color-bronze-soft);
   }
 
   /* Boutons en capitales, interlettrage augmenté — CDC §5.3, ligne « Boutons ». */

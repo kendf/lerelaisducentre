@@ -51,7 +51,7 @@ export default async function FaqPage({
 
   return (
     <>
-      <section className="mx-auto max-w-3xl px-5 pt-20 pb-14 text-center lg:pt-28">
+      <section className="mx-auto max-w-3xl px-5 pt-14 pb-10 text-center lg:pt-20">
         <p className="eyebrow">{t("subtitle")}</p>
         <h1 className="mt-6 font-display text-4xl leading-[1.1] text-balance sm:text-5xl">
           {t("title")}

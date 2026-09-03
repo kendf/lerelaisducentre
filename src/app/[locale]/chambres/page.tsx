@@ -122,7 +122,7 @@ export default async function RoomsPage({
             return (
               <article
                 key={room.id}
-                className="grid items-center gap-12 border-b border-ivory-line py-20 last:border-0 lg:grid-cols-2 lg:gap-16 lg:py-24"
+                className="grid items-center gap-12 border-b border-ivory-line py-14 last:border-0 lg:grid-cols-2 lg:gap-16 lg:py-16"
               >
                 {/* --- Composition à deux photographies -------------------- */}
                 <div
