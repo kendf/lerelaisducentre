@@ -51,7 +51,11 @@ export default function AdminRootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${inter.variable}`}>
+    <html
+      lang="fr"
+      data-scroll-behavior="smooth"
+      className={`${playfair.variable} ${inter.variable}`}
+    >
       <body className="bg-ivory-deep">{children}</body>
     </html>
   );

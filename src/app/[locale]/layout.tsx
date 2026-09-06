@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import localFont from "next/font/local";
 
 import { routing } from "@/i18n/routing";
@@ -10,6 +10,7 @@ import { Footer } from "@/components/site/footer";
 import { DemoBanner } from "@/components/site/demo-banner";
 import { AssistantMount } from "@/components/site/assistant-mount";
 import "../globals.css";
+import { getPublicSettings } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
 
 /**
@@ -117,15 +118,39 @@ export default async function LocaleLayout({
   // tout le site en rendu dynamique et on perd le bénéfice SEO/performance.
   setRequestLocale(locale);
 
+  // CE QUI PART DANS LE NAVIGATEUR. Sans prop `messages`, next-intl envoie
+  // TOUT le dictionnaire au client — les trois documents réglementaires
+  // compris, soit près d'un tiers du fichier, alors qu'ils ne sont lus que par
+  // des composants serveur. On les retire.
+  //
+  // Le tri est fait par exclusion et non par liste blanche : oublier un
+  // espace de noms dans une liste blanche produit une erreur d'exécution sur
+  // une page rarement visitée, découverte par un visiteur plutôt que par nous.
+  // Retirer ce dont on est certain qu'aucun composant client ne se sert est
+  // sans risque et rend déjà l'essentiel.
+  // Coordonnées du bandeau supérieur. Elles viennent des réglages en base,
+  // comme partout ailleurs : le jour où l'hôtel change de numéro, il le change
+  // à un seul endroit et le site entier suit.
+  const settings = await getPublicSettings();
+
+  const clientMessages = Object.fromEntries(
+    Object.entries(await getMessages()).filter(([namespace]) => namespace !== "legal")
+  );
+
   return (
     <html
       lang={locale}
+      // Next avertit quand `scroll-behavior: smooth` est posé sur <html> sans
+      // cet attribut : il ne peut pas savoir si le lissage doit s'appliquer
+      // aux changements de route. Ici oui — c'est le même geste pour le
+      // visiteur, qu'il suive une ancre ou un lien de page.
+      data-scroll-behavior="smooth"
       className={`${playfair.variable} ${greatVibes.variable} ${inter.variable}`}
     >
       <body className="flex min-h-screen flex-col">
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={clientMessages}>
           <DemoBanner />
-          <Header />
+          <Header contact={settings.hotel_contact} />
           <main className="flex-1">{children}</main>
           <Footer />
           {/* Assistant préréglé : présent sur toutes les pages publiques, jamais
