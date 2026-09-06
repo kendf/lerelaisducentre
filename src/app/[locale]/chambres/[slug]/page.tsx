@@ -94,89 +94,87 @@ export default async function RoomDetailPage({
     { label: t("bed"), value: room.bed_config ?? "—" },
     {
       label: tCommon("from"),
-      value: formatXof(room.base_price_xof, lang),
+      value: formatXof(room.base_price_xof),
       accent: true,
     },
   ];
 
   return (
     <>
-      {/* --- Titre et faits ------------------------------------------------- */}
-      <section className="mx-auto max-w-5xl px-5 pt-12 lg:px-8 lg:pt-14">
-        <Link
-          href="/chambres"
-          className="inline-flex items-center gap-2 text-sm text-brown-soft transition-colors hover:text-bronze"
-        >
-          <ArrowLeft size={15} />
-          {tCommon("backToRooms")}
-        </Link>
-
-        <h1 className="mt-7 font-display text-4xl leading-[1.1] text-balance sm:text-5xl">
-          {c.name}
-        </h1>
-        {c.short ? (
-          <p className="signature mt-2 text-3xl">{c.short}</p>
-        ) : null}
-
-        <dl className="mt-10 grid grid-cols-2 divide-ivory-line border-y border-ivory-line sm:grid-cols-4 sm:divide-x">
-          {facts.map((fact) => (
-            <div key={fact.label} className="px-1 py-5 sm:px-5 sm:first:pl-0">
-              <dt className="text-xs uppercase tracking-wider text-brown-soft">
-                {fact.label}
-              </dt>
-              <dd
-                className={
-                  fact.accent
-                    ? "numeric mt-2 text-xl font-medium text-bronze"
-                    : "mt-2 text-[15px]"
-                }
-              >
-                {fact.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      {/* --- Photographie principale ---------------------------------------- */}
-      <div className="mx-auto mt-12 max-w-5xl px-5 lg:px-8">
-        <div className="arch aspect-4/3 bg-ivory-line sm:aspect-16/9">
+      {/* --- HÉRO : le titre posé sur la chambre elle-même --------------------
+          La version précédente empilait titre, tableau de faits, puis une
+          photographie. Trois blocs pour une seule information : « voici cette
+          chambre ». Le visiteur devait descendre pour découvrir ce qu'il venait
+          voir. Ici la photographie EST la page, le nom et le tarif se lisent
+          dessus, et la première chose à l'écran est la chambre.
+          -------------------------------------------------------------------- */}
+      <section className="relative flex min-h-[58svh] flex-col overflow-hidden lg:min-h-[64svh]">
+        <div className="absolute inset-0 bg-ivory-line">
           {cover ? (
             <HotelImage
               basePath={cover.storage_path}
               alt={cover.alt[lang] ?? c.name}
-              sizes="(min-width: 1024px) 960px, 100vw"
+              sizes="100vw"
               priority
             />
           ) : null}
         </div>
-      </div>
 
-      {/* --- Texte, équipements et réservation ------------------------------ */}
+        {/* Voile indispensable : le tarif doit rester lisible qu'il tombe sur
+            un mur clair ou sur une literie blanche. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-brown/90 via-brown/45 to-brown/55"
+        />
+
+        <div className="relative z-10 mx-auto w-full max-w-5xl px-5 pt-8 lg:px-8">
+          <Link
+            href="/chambres"
+            className="inline-flex items-center gap-2 text-sm text-ivory/85 transition-colors hover:text-ivory"
+          >
+            <ArrowLeft size={15} />
+            {tCommon("backToRooms")}
+          </Link>
+        </div>
+
+        <div className="relative z-10 mx-auto mt-auto w-full max-w-5xl px-5 pb-12 lg:px-8 lg:pb-16">
+          <h1 className="font-display text-4xl leading-[1.05] text-balance text-ivory sm:text-5xl lg:text-6xl">
+            {c.name}
+          </h1>
+          {c.short ? (
+            <p className="signature mt-2 text-3xl text-bronze-tint">{c.short}</p>
+          ) : null}
+
+          <dl className="mt-7 flex flex-wrap items-baseline gap-x-9 gap-y-3">
+            {facts.map((fact) => (
+              <div key={fact.label} className="flex items-baseline gap-2.5">
+                <dt className="text-xs tracking-wider text-ivory/70 uppercase">
+                  {fact.label}
+                </dt>
+                <dd
+                  className={
+                    fact.accent
+                      ? "price text-2xl font-medium text-bronze-tint"
+                      : "text-[15px] text-ivory"
+                  }
+                >
+                  {fact.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* --- Le récit, et l'encart qui suit la lecture ------------------------ */}
       <section className="mx-auto max-w-5xl px-5 py-section lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_320px] lg:gap-16">
           <div>
+            <h2 className="text-2xl">{t("detailsTitle")}</h2>
             {c.description ? (
-              <p className="text-[17px] leading-[1.75] text-brown-soft">
+              <p className="mt-5 text-[17px] leading-[1.75] text-brown-soft">
                 {c.description}
               </p>
-            ) : null}
-
-            {room.amenities.length > 0 ? (
-              <>
-                <h2 className="mt-12 text-2xl">{t("amenitiesTitle")}</h2>
-                <ul className="mt-6 grid gap-x-8 gap-y-3 border-t border-ivory-line pt-6 sm:grid-cols-2">
-                  {room.amenities.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2.5 text-[15px] text-brown-soft"
-                    >
-                      <Check size={16} className="mt-0.5 shrink-0 text-bronze" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </>
             ) : null}
           </div>
 
@@ -186,8 +184,8 @@ export default async function RoomDetailPage({
             <div className="border border-ivory-line bg-cream p-7">
               <p className="text-sm text-brown-soft">{tCommon("from")}</p>
               <p className="mt-1">
-                <span className="numeric text-3xl font-medium text-bronze">
-                  {formatXof(room.base_price_xof, lang)}
+                <span className="price text-3xl font-medium text-bronze">
+                  {formatXof(room.base_price_xof)}
                 </span>
                 <span className="text-sm text-brown-soft">
                   {" "}
@@ -258,6 +256,30 @@ export default async function RoomDetailPage({
         </section>
       ) : null}
 
+      {/* --- Équipements ------------------------------------------------------
+          Sortis de la colonne de texte, où ils se lisaient comme une note de
+          bas de page. Chaque équipement porte sa pastille : la liste se
+          parcourt du regard au lieu de se lire ligne à ligne.
+          -------------------------------------------------------------------- */}
+      {room.amenities.length > 0 ? (
+        <section className="mx-auto max-w-5xl px-5 py-section lg:px-8">
+          <h2 className="text-2xl">{t("amenitiesTitle")}</h2>
+          <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-3 lg:grid-cols-4">
+            {room.amenities.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-3 text-[15px] text-brown-soft"
+              >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-bronze-tint text-bronze">
+                  <Check size={17} aria-hidden />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       {/* --- Autres chambres --------------------------------------------------
           Une fiche de chambre est une impasse : le visiteur que cette catégorie
           ne convainc pas doit remonter jusqu'à la navigation, puis rouvrir la
@@ -300,8 +322,8 @@ export default async function RoomDetailPage({
                       <p className="mt-5 font-display text-lg transition-colors group-hover:text-bronze">
                         {oc.name}
                       </p>
-                      <p className="numeric mt-1 text-sm text-brown-soft">
-                        {formatXof(other.base_price_xof, lang)}
+                      <p className="price mt-1 text-sm text-brown-soft">
+                        {formatXof(other.base_price_xof)}
                       </p>
                     </Link>
                   </li>

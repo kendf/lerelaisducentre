@@ -105,6 +105,14 @@ export default async function HomePage({
     settings.hotel_contact.maps_query
   )}`;
 
+  // Catégories proposées au filtre de recherche, déjà traduites : le
+  // formulaire est un composant client, il n'a pas accès aux traductions
+  // serveur et n'a pas à connaître la forme d'un RoomType.
+  const roomOptions = roomTypes.map((room) => ({
+    id: room.id,
+    name: (room.content[lang] ?? room.content.fr).name,
+  }));
+
   return (
     <>
       {/* =====================================================================
@@ -134,8 +142,12 @@ export default async function HomePage({
           {/* La recherche vit DANS le panneau, elle ne flotte pas par-dessus
               l'image : le premier geste attendu du visiteur fait partie du
               discours d'accueil, il ne s'y superpose pas. */}
-          <div className="mt-10 max-w-md border-t border-ivory-line pt-8">
-            <StaySearchForm defaults={searchDefaults} variant="panel" />
+          <div className="fade-up mt-10 max-w-md border-t border-ivory-line pt-8">
+            <StaySearchForm
+              defaults={searchDefaults}
+              roomTypes={roomOptions}
+              variant="panel"
+            />
           </div>
         </div>
 
@@ -181,7 +193,54 @@ export default async function HomePage({
       </section>
 
       {/* =====================================================================
-          3. CHAMBRES — portraits sommés d'une arche
+          3. LA MAISON — panoramique, texte posé dessus
+          Placée AVANT les chambres, et c'est un choix de discours : un
+          visiteur qui découvre l'établissement veut d'abord savoir où il met
+          les pieds. Lui présenter quatre catégories et quatre tarifs avant de
+          lui avoir dit ce qu'est la maison, c'est vendre avant d'accueillir.
+          Les chambres suivent immédiatement, quand la question « et alors,
+          combien ? » se pose d'elle-même.
+          ===================================================================== */}
+      <section className="bg-ivory-deep py-section">
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          {/* Le format change avec l'écran, et ce n'est pas un détail : en 21/9
+              sur un téléphone, la bande ferait 150 px de haut — le texte posé
+              dessus déborderait. Le cadre s'allonge donc quand la largeur
+              manque, pour que la superposition tienne partout. */}
+          <div className="relative aspect-4/5 overflow-hidden sm:aspect-16/9 lg:aspect-21/9">
+            <HotelImage
+              basePath="/images/hotel/07"
+              alt=""
+              sizes="(min-width: 1024px) 1152px, 100vw"
+            />
+
+            {/* Voile dégradé. Sans lui, un texte clair posé sur une façade
+                claire et un ciel blanc devient illisible : la lisibilité ne
+                peut pas dépendre de ce que montre la photographie. */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/55 to-brown/20"
+            />
+
+            <div className="absolute inset-0 flex flex-col items-center justify-end px-6 pb-9 text-center sm:justify-center sm:pb-6 lg:px-12">
+              <p className="eyebrow text-ivory/85">{t("introEyebrow")}</p>
+              <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-ivory sm:mt-6 sm:text-[17px]">
+                {t("introBody")}
+              </p>
+              <Link
+                href="/notre-maison"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-medium tracking-[0.14em] text-ivory uppercase transition-colors hover:text-bronze-tint"
+              >
+                {tCommon("seeMore")}
+                <ArrowRight size={15} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          4. CHAMBRES — portraits sommés d'une arche
           Format vertical et arc plein cintre : une porte de chambre, pas une
           vignette de catalogue.
           ===================================================================== */}
@@ -222,7 +281,7 @@ export default async function HomePage({
                       ) : null}
                     </div>
 
-                    <h3 className="mt-6 text-center font-display text-xl transition-colors group-hover:text-bronze">
+                    <h3 className="mt-6 text-center font-display text-2xl transition-colors group-hover:text-bronze">
                       {c.name}
                     </h3>
                     <p className="mt-2 text-center text-sm text-brown-soft">
@@ -236,8 +295,8 @@ export default async function HomePage({
                       <span className="text-xs text-brown-soft">
                         {tCommon("from")}{" "}
                       </span>
-                      <span className="numeric text-lg font-medium text-bronze">
-                        {formatXof(room.base_price_xof, lang)}
+                      <span className="price text-2xl font-medium text-bronze">
+                        {formatXof(room.base_price_xof)}
                       </span>
                     </p>
                   </Link>
@@ -254,41 +313,11 @@ export default async function HomePage({
       </section>
 
       {/* =====================================================================
-          4. LA MAISON — panoramique puis récit centré
-          Une seule image très large, puis un texte en colonne étroite. Pas de
-          collage : la maison se raconte, elle ne s'étale pas.
-          ===================================================================== */}
-      <section className="bg-ivory-deep py-section">
-        <div className="mx-auto max-w-6xl px-5 lg:px-8">
-          <div className="aspect-21/9 overflow-hidden">
-            <HotelImage
-              basePath="/images/hotel/07"
-              alt=""
-              sizes="(min-width: 1024px) 1152px, 100vw"
-            />
-          </div>
-
-          <div className="mx-auto mt-14 max-w-2xl text-center">
-            <p className="eyebrow">{t("introEyebrow")}</p>
-            <p className="mt-6 text-[17px] leading-relaxed text-brown-soft">
-              {t("introBody")}
-            </p>
-            <Link
-              href="/notre-maison"
-              className="mt-9 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.14em] text-bronze transition-colors hover:text-bronze-dark"
-            >
-              {tCommon("seeMore")}
-              <ArrowRight size={15} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================================
-          5. SERVICES — bandes horizontales alternées
-          Chaque adresse occupe toute la largeur, image et texte côte à côte,
-          le sens s'inversant d'une bande à l'autre. Rien à voir avec trois
-          cartes alignées : on parcourt la maison pièce par pièce.
+          5. SUR PLACE — mosaïque de vignettes
+          Les bandes alternées de la version précédente répétaient la figure de
+          la page Services : deux fois le même geste, aucune valeur ajoutée à la
+          seconde lecture. La mosaïque dit autre chose — trois lieux, un coup
+          d'œil, on entre par celui qui attire.
           ===================================================================== */}
       <section className="mx-auto max-w-6xl px-5 py-section lg:px-8">
         <div className="max-w-xl">
@@ -299,46 +328,53 @@ export default async function HomePage({
           </p>
         </div>
 
-        <div className="mt-14 space-y-14">
-          {services.map((service, index) => (
-            <article
-              key={service.title}
-              className="grid items-center gap-8 md:grid-cols-12 md:gap-12"
-            >
-              <div
-                className={`aspect-4/3 overflow-hidden md:col-span-7 ${
-                  index % 2 === 1 ? "md:order-2" : ""
-                }`}
+        <ul className="mt-11 grid gap-4 md:grid-cols-3">
+          {services.map((service) => (
+            <li key={service.title}>
+              <Link
+                href="/services"
+                className="group relative block h-72 overflow-hidden lg:h-80"
               >
                 <HotelImage
                   basePath={service.image}
                   alt=""
-                  sizes="(min-width: 768px) 58vw, 100vw"
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="transition-transform duration-700 group-hover:scale-105"
                 />
-              </div>
 
-              <div
-                className={`md:col-span-5 ${index % 2 === 1 ? "md:order-1" : ""}`}
-              >
-                <h3 className="font-display text-2xl">{service.title}</h3>
-                <p className="mt-4 text-[15px] leading-relaxed text-brown-soft">
-                  {service.body}
-                </p>
-                {service.hours ? (
-                  <p className="mt-5 text-xs uppercase tracking-wider text-bronze">
-                    {service.hours}
-                  </p>
-                ) : null}
-              </div>
-            </article>
+                {/* Le voile s'assombrit au survol. Il n'est pas décoratif : sans
+                    lui, un titre clair posé sur une nappe blanche ou un ciel
+                    disparaît. */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-brown via-brown/35 to-transparent transition-colors duration-300 group-hover:from-brown/95"
+                />
+
+                <div className="absolute inset-x-0 bottom-0 p-6 text-ivory">
+                  <h3 className="font-display text-xl transition-transform duration-300 group-hover:-translate-y-1">
+                    {service.title}
+                  </h3>
+
+                  {/* Le texte se déplie au survol. `grid-rows` de 0fr à 1fr
+                      anime une hauteur qu'on ne connaît pas d'avance — aucune
+                      valeur fixe ne le permettrait sans couper le texte.
+                      Sur mobile il reste ouvert : on ne survole pas au doigt. */}
+                  <div className="mt-2 grid grid-rows-[1fr] opacity-100 transition-all duration-300 lg:mt-0 lg:grid-rows-[0fr] lg:opacity-0 lg:group-hover:mt-2 lg:group-hover:grid-rows-[1fr] lg:group-hover:opacity-100">
+                    <p className="overflow-hidden text-sm leading-relaxed text-ivory/85">
+                      {service.body}
+                    </p>
+                  </div>
+
+                  {service.hours ? (
+                    <p className="numeric mt-3 text-xs tracking-[0.14em] text-bronze-tint uppercase">
+                      {service.hours}
+                    </p>
+                  ) : null}
+                </div>
+              </Link>
+            </li>
           ))}
-        </div>
-
-        <div className="mt-14">
-          <Link href="/services" className="btn btn-outline">
-            {t("servicesCta")}
-          </Link>
-        </div>
+        </ul>
       </section>
 
       {/* =====================================================================

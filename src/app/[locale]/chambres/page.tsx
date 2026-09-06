@@ -68,6 +68,11 @@ export default async function RoomsPage({
     children: 0,
   };
 
+  const roomOptions = roomTypes.map((room) => ({
+    id: room.id,
+    name: (room.content[lang] ?? room.content.fr).name,
+  }));
+
   return (
     <>
       {/* --- Bandeau pleine largeur ---------------------------------------- */}
@@ -99,7 +104,11 @@ export default async function RoomsPage({
           -------------------------------------------------------------------- */}
       <div className="sticky top-20 z-30 border-y border-ivory-line bg-ivory/95 backdrop-blur">
         <div className="mx-auto max-w-6xl px-5 py-4 lg:px-8">
-          <StaySearchForm defaults={searchDefaults} variant="bar" />
+          <StaySearchForm
+            defaults={searchDefaults}
+            roomTypes={roomOptions}
+            variant="bar"
+          />
         </div>
       </div>
 
@@ -158,8 +167,8 @@ export default async function RoomsPage({
                   <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
                     <h2 className="font-display text-3xl">{c.name}</h2>
                     <p className="text-right">
-                      <span className="numeric text-2xl font-medium text-bronze">
-                        {formatXof(room.base_price_xof, lang)}
+                      <span className="price text-2xl font-medium text-bronze">
+                        {formatXof(room.base_price_xof)}
                       </span>
                       <span className="block text-xs text-brown-soft">
                         {tCommon("perNight")}

@@ -148,33 +148,47 @@ export default async function ServicesPage({
 
             <section id={venue.id} className="scroll-mt-28 py-12 lg:py-16">
               <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
+                {/* MONTAGE À DEUX PHOTOS. Une seule image cadrée dit « voici
+                    la pièce » ; deux qui se chevauchent disent « voici ce qu'on
+                    y ressent » — le plan large pose le lieu, le détail donne la
+                    matière. Le liseré ivoire sur la seconde n'est pas un ornement :
+                    sans lui, deux photographies aux tons proches se confondraient
+                    à leur point de contact. */}
                 <div
                   className={cn(
-                    "lg:col-span-7",
+                    "relative pr-6 pb-8 sm:pr-10 sm:pb-12 lg:col-span-7",
                     // L'alternance évite la colonne unique qui donnerait à la
                     // page un rythme de catalogue.
                     index % 2 === 1 && "lg:order-2"
                   )}
                 >
-                  <div className="aspect-16/10 overflow-hidden bg-ivory-line">
+                  <div className="aspect-4/3 w-[78%] overflow-hidden bg-ivory-line">
                     <HotelImage
                       basePath={venue.cover}
                       alt=""
-                      sizes="(min-width: 1024px) 58vw, 100vw"
+                      sizes="(min-width: 1024px) 40vw, 80vw"
+                    />
+                  </div>
+
+                  <div className="absolute right-0 bottom-0 aspect-4/3 w-[46%] overflow-hidden border-[6px] border-ivory bg-ivory-line shadow-lg">
+                    <HotelImage
+                      basePath={venue.thumb}
+                      alt=""
+                      sizes="(min-width: 1024px) 22vw, 46vw"
                     />
                   </div>
                 </div>
 
                 <div className="lg:col-span-5">
+                  {venue.hours ? (
+                    <p className="numeric mb-4 inline-block bg-bronze-tint px-3 py-1 text-xs tracking-[0.12em] text-bronze-dark uppercase">
+                      {venue.hours}
+                    </p>
+                  ) : null}
                   <h2 className="text-3xl">{venue.title}</h2>
                   <p className="mt-5 text-[17px] leading-relaxed text-brown-soft">
                     {venue.body}
                   </p>
-                  {venue.hours ? (
-                    <p className="mt-6 border-t border-ivory-line pt-5 text-xs tracking-[0.14em] text-bronze uppercase">
-                      {venue.hours}
-                    </p>
-                  ) : null}
                 </div>
               </div>
             </section>

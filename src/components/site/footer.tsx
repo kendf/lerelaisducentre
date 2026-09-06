@@ -28,7 +28,11 @@ export async function Footer() {
 
   return (
     <footer className="border-t border-ivory-line bg-ivory-deep">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+      {/* Pleine largeur, comme l'en-tête : le nom de l'établissement se cale
+          à gauche de l'écran et le bloc « Informations » à droite. Un pied de
+          page centré sur 1 150 px laissait deux vides latéraux qui n'avaient
+          aucune raison d'être. Hauteur resserrée au passage. */}
+      <div className="grid gap-8 px-5 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
         <div>
           <p className="font-display text-lg tracking-wide text-brown">
             LE RELAIS <span className="text-bronze">DU CENTRE</span>
@@ -38,7 +42,7 @@ export async function Footer() {
 
         <nav aria-labelledby="footer-nav">
           <h2 id="footer-nav" className="eyebrow mb-4">{t("navTitle")}</h2>
-          <ul className="space-y-2.5">
+          <ul className="space-y-2">
             {NAV.map((item) => (
               <li key={item.href}>
                 <Link
@@ -54,7 +58,7 @@ export async function Footer() {
 
         <div>
           <h2 className="eyebrow mb-4">{t("contactTitle")}</h2>
-          <ul className="space-y-2.5 text-sm text-brown-soft">
+          <ul className="space-y-2 text-sm text-brown-soft">
             <li className="flex items-start gap-2.5">
               <MapPin size={15} className="mt-0.5 shrink-0 text-bronze-soft" />
               <span>{contact.address}</span>
@@ -93,7 +97,7 @@ export async function Footer() {
 
         <nav aria-labelledby="footer-legal">
           <h2 id="footer-legal" className="eyebrow mb-4">{t("legalTitle")}</h2>
-          <ul className="space-y-2.5">
+          <ul className="space-y-2">
             {LEGAL.map((item) => (
               <li key={item.href}>
                 <Link
@@ -109,7 +113,7 @@ export async function Footer() {
       </div>
 
       <div className="border-t border-ivory-line/70">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-6 text-xs text-brown-soft sm:flex-row sm:items-center sm:justify-between lg:px-8">
+        <div className="flex flex-col gap-2 px-5 py-4 text-xs text-brown-soft sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Hôtel Le Relais du Centre — {t("rights")}</p>
           <p>{t("madeBy")}</p>
         </div>
