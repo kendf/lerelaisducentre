@@ -5,7 +5,11 @@ import { redirect } from "@/i18n/navigation";
 import { createPublicClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import { guestDetailsSchema } from "@/lib/validation/schemas";
 import { toBookingErrorCode, type BookingErrorCode } from "@/lib/booking/errors";
-import { HOLD_COOKIE, HOLD_COOKIE_MAX_AGE } from "@/lib/booking/hold-cookie";
+import {
+  GUEST_COOKIE,
+  HOLD_COOKIE,
+  HOLD_COOKIE_MAX_AGE,
+} from "@/lib/booking/hold-cookie";
 import type { HoldResult } from "@/types/database";
 
 export interface HoldState {
@@ -14,7 +18,7 @@ export interface HoldState {
 }
 
 /**
- * Étape 2 → 3 : création de la pré-réservation.
+ * Étape 2 → 3 : création de la pré-réservation, puis récapitulatif.
  *
  * Rien n'est calculé ici : ni le prix, ni la disponibilité. Tout est délégué à
  * `create_reservation_hold`, qui fait le devis, prend le verrou, attribue une
@@ -55,6 +59,21 @@ export async function createHold(
 
   const input = parsed.data;
   const supabase = createPublicClient();
+  const cookieStore = await cookies();
+
+  // LIBÉRATION DE L'ANCIEN BLOCAGE. Le visiteur qui revient corriger une faute
+  // de frappe depuis le récapitulatif repasse par ce formulaire : sans cet
+  // appel, chaque correction laisserait derrière elle une chambre immobilisée
+  // jusqu'à l'expiration de son délai.
+  //
+  // L'appel est fait AVANT la nouvelle demande, et son échec n'interrompt rien :
+  // `release_hold` refuse de toucher une réservation confirmée, et un blocage
+  // qu'on ne parvient pas à libérer finira de toute façon par expirer. Perdre la
+  // réservation en cours pour un ménage qui a raté serait un mauvais échange.
+  const previousToken = cookieStore.get(HOLD_COOKIE)?.value;
+  if (previousToken) {
+    await supabase.rpc("release_hold", { p_token: previousToken });
+  }
 
   const { data, error } = await supabase.rpc("create_reservation_hold", {
     p_room_type_id: input.roomTypeId,
@@ -78,7 +97,6 @@ export async function createHold(
 
   const hold = data as HoldResult & { public_token: string };
 
-  const cookieStore = await cookies();
   cookieStore.set(HOLD_COOKIE, hold.public_token, {
     httpOnly: true,
     sameSite: "lax",
@@ -90,10 +108,36 @@ export async function createHold(
     maxAge: HOLD_COOKIE_MAX_AGE,
   });
 
+  // Les coordonnées sont conservées pour être REPRÉSENTÉES si le visiteur
+  // revient les corriger. Sans cela, « Modifier mes informations » renvoyait
+  // vers un formulaire vide : le visiteur devait tout retaper pour changer un
+  // seul caractère — la manière la plus sûre de lui faire abandonner.
+  cookieStore.set(
+    GUEST_COOKIE,
+    JSON.stringify({
+      firstName: input.firstName,
+      lastName: input.lastName,
+      email: input.email,
+      phone: input.phone,
+      country: input.country ?? "",
+      notes: input.notes ?? "",
+    }),
+    {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: HOLD_COOKIE_MAX_AGE,
+    }
+  );
+
   // Redirection côté serveur : le visiteur ne peut pas atterrir sur la page de
   // paiement sans que le hold existe réellement, et un rechargement de l'étape 2
   // ne recrée pas une seconde réservation.
-  redirect({ href: "/reserver/paiement", locale: input.locale });
+  // Vers le RÉCAPITULATIF, pas vers le paiement : le visiteur relit ce qu'il
+  // engage avant qu'on lui demande de l'argent. Le blocage existe déjà à cet
+  // instant — la chambre est retenue pendant qu'il vérifie.
+  redirect({ href: "/reserver/recapitulatif", locale: input.locale });
 
   // `redirect` interrompt l'exécution en levant une exception : cette ligne
   // n'est jamais atteinte, elle satisfait l'analyse de flux de TypeScript.

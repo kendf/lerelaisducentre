@@ -27,6 +27,10 @@ export const routing = defineRouting({
     "/questions": { fr: "/questions", en: "/faq" },
     "/reserver": { fr: "/reserver", en: "/book" },
     "/reserver/informations": { fr: "/reserver/informations", en: "/book/details" },
+    // Le récapitulatif est une ÉTAPE, pas un encart : il a donc son adresse.
+    // Le visiteur peut y revenir, l'ouvrir dans un onglet, et le bouton
+    // « précédent » du navigateur fait ce qu'il annonce.
+    "/reserver/recapitulatif": { fr: "/reserver/recapitulatif", en: "/book/summary" },
     "/reserver/paiement": { fr: "/reserver/paiement", en: "/book/payment" },
     // Le segment porte le jeton aléatoire de la réservation, pas sa référence
     // séquentielle : voir le commentaire de `public_token` dans 0001_schema.sql.

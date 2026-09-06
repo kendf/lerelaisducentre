@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * Fil des trois étapes de la réservation (CDC §5.4).
+ * Fil des quatre étapes de la réservation (CDC §5.4).
  *
  * POURQUOI UN INDICATEUR, ET POURQUOI NUMÉROTÉ. Un tunnel de paiement fait
  * peur : le visiteur ne sait pas combien de temps il en a, ni s'il pourra
@@ -15,13 +15,14 @@ import { cn } from "@/lib/utils";
  * Les étapes franchies portent une COCHE en plus de la couleur : l'état ne
  * repose jamais sur la seule perception des teintes.
  */
-export async function BookingSteps({ current }: { current: 1 | 2 | 3 }) {
+export async function BookingSteps({ current }: { current: 1 | 2 | 3 | 4 }) {
   const t = await getTranslations("booking");
 
   const steps = [
     { n: 1 as const, label: t("step1") },
     { n: 2 as const, label: t("step2") },
     { n: 3 as const, label: t("step3") },
+    { n: 4 as const, label: t("step4") },
   ];
 
   return (
@@ -29,7 +30,7 @@ export async function BookingSteps({ current }: { current: 1 | 2 | 3 }) {
       aria-label={t("title")}
       className="border-b border-ivory-line bg-ivory-deep"
     >
-      <ol className="mx-auto flex max-w-3xl items-center gap-2 px-5 py-6 sm:gap-4 lg:px-8">
+      <ol className="mx-auto flex max-w-3xl items-center gap-1.5 px-5 py-5 sm:gap-3 lg:px-8">
         {steps.map((step, index) => {
           const done = step.n < current;
           const active = step.n === current;

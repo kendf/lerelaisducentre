@@ -13,6 +13,16 @@ import { isRetryableWithNewSearch } from "@/lib/booking/errors";
 
 const INITIAL: HoldState = { status: "idle" };
 
+/** Coordonnées déjà saisies, représentées à l'identique en cas de retour. */
+export interface GuestDefaults {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  country: string;
+  notes: string;
+}
+
 interface GuestDetailsFormProps {
   stay: {
     roomTypeId: string;
@@ -21,6 +31,13 @@ interface GuestDetailsFormProps {
     adults: number;
     children: number;
   };
+  /**
+   * Valeurs à préremplir. Le formulaire reste NON CONTRÔLÉ : `defaultValue`
+   * pose la valeur initiale puis laisse le champ vivre sa vie. Un état React
+   * n'apporterait rien ici — il n'y a aucune validation en cours de frappe — et
+   * il ferait perdre la saisie à chaque re-rendu de l'action serveur.
+   */
+  defaults?: GuestDefaults;
 }
 
 function SubmitButton() {
@@ -35,7 +52,7 @@ function SubmitButton() {
   );
 }
 
-export function GuestDetailsForm({ stay }: GuestDetailsFormProps) {
+export function GuestDetailsForm({ stay, defaults }: GuestDetailsFormProps) {
   const t = useTranslations("booking");
   const locale = useLocale();
   const [state, formAction] = useActionState(createHold, INITIAL);
@@ -62,6 +79,7 @@ export function GuestDetailsForm({ stay }: GuestDetailsFormProps) {
           </span>
           <input
             name="firstName"
+            defaultValue={defaults?.firstName}
             required
             minLength={2}
             maxLength={80}
@@ -75,6 +93,7 @@ export function GuestDetailsForm({ stay }: GuestDetailsFormProps) {
           </span>
           <input
             name="lastName"
+            defaultValue={defaults?.lastName}
             required
             minLength={2}
             maxLength={80}
@@ -92,6 +111,7 @@ export function GuestDetailsForm({ stay }: GuestDetailsFormProps) {
           <input
             type="email"
             name="email"
+            defaultValue={defaults?.email}
             required
             maxLength={200}
             autoComplete="email"
@@ -105,6 +125,7 @@ export function GuestDetailsForm({ stay }: GuestDetailsFormProps) {
           <input
             type="tel"
             name="phone"
+            defaultValue={defaults?.phone}
             required
             minLength={8}
             maxLength={30}
@@ -120,6 +141,7 @@ export function GuestDetailsForm({ stay }: GuestDetailsFormProps) {
         </span>
         <input
           name="country"
+          defaultValue={defaults?.country}
           maxLength={80}
           autoComplete="country-name"
           className="field"
@@ -132,6 +154,7 @@ export function GuestDetailsForm({ stay }: GuestDetailsFormProps) {
         </span>
         <textarea
           name="notes"
+          defaultValue={defaults?.notes}
           rows={3}
           maxLength={1000}
           placeholder={t("notesPlaceholder")}

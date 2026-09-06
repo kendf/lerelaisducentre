@@ -66,7 +66,7 @@ export default async function PaymentPage({
 
   return (
     <>
-      <BookingSteps current={3} />
+      <BookingSteps current={4} />
 
       <div className="mx-auto max-w-2xl px-5 py-14 lg:px-8 lg:py-16">
         {expired ? (
@@ -111,8 +111,8 @@ export default async function PaymentPage({
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="text-brown-soft">{t("summaryTotal")}</dt>
-                  <dd className="numeric">
-                    {formatXof(reservation.total_amount_xof, lang)}
+                  <dd className="price">
+                    {formatXof(reservation.total_amount_xof)}
                   </dd>
                 </div>
               </dl>
@@ -121,15 +121,15 @@ export default async function PaymentPage({
                 <span className="text-sm text-brown-soft">
                   {t("summaryDeposit")}
                 </span>
-                <span className="numeric text-2xl font-medium text-bronze">
-                  {formatXof(reservation.deposit_amount_xof, lang)}
+                <span className="price text-2xl font-medium text-bronze">
+                  {formatXof(reservation.deposit_amount_xof)}
                 </span>
               </div>
             </div>
 
             <div className="mt-8">
               <PaymentButton
-                amountLabel={formatXof(reservation.deposit_amount_xof, lang)}
+                amountLabel={formatXof(reservation.deposit_amount_xof)}
               />
             </div>
 
