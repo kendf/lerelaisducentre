@@ -257,15 +257,15 @@
     "termsTitle": "Booking terms",
     "privacyTitle": "Privacy policy",
     "updated": "Last updated: 6 September 2026",
-    "toComplete": "The operator's registration details — RCCM number, tax registration, legal form — are to be supplied by the hotel before the site goes live.",
+    "toComplete": "The operator's registration details — RCCM number, tax registration certificate, legal form — are to be supplied by the hotel before the site goes live.",
     "notice": {
       "sections": [
         {
           "heading": "Site publisher",
           "body": [
             "Hôtel Le Relais du Centre — tourist accommodation establishment located in Tiébissou, Côte d'Ivoire.",
-            "RCCM number: [to be completed]. Tax registration: [to be completed]. Legal form and share capital: [to be completed].",
-            "Publication director: the hotel manager."
+            "RCCM number (Ivorian trade and companies register): [to be completed]. Tax registration certificate (DFE): [to be completed]. Legal form and share capital: [to be completed].",
+            "Director of publication: the hotel manager."
           ]
         },
         {
@@ -298,7 +298,7 @@
         {
           "heading": "Liability",
           "body": [
-            "The hotel endeavours to keep the information on this site accurate and current. The availability and rates shown at the time of booking prevail; descriptions and photographs are indicative.",
+            "The hotel makes every effort to keep the information on this site accurate and up to date. The availability and rates shown at the time of booking prevail; descriptions and photographs are indicative.",
             "The hotel cannot be held liable for a temporary unavailability of the site, nor for a failure of the payment service, which is operated by its provider."
           ]
         }
@@ -339,7 +339,7 @@
           "body": [
             "Any booking may be cancelled free of charge up to {hours} hours before the arrival date. The deposit is then refunded in full, by the same payment method.",
             "After that deadline, the deposit is retained by the hotel as compensation for holding the room.",
-            "Any change request — dates, room category, number of guests — should be made directly to reception and remains subject to availability."
+            "Any change — dates, room category, number of guests — should be requested directly from reception and remains subject to availability."
           ]
         },
         {
@@ -352,7 +352,7 @@
           "heading": "Arrival and departure",
           "body": [
             "Rooms are available from {checkIn} on the day of arrival, and must be vacated before {checkOut} on the day of departure.",
-            "Late arrival is possible: reception is open twenty-four hours a day. It is nonetheless preferable to give notice."
+            "Late arrival is possible: reception is open 24 hours a day. It is still best to let us know in advance."
           ]
         },
         {
@@ -375,7 +375,7 @@
         {
           "heading": "Data controller",
           "body": [
-            "Hôtel Le Relais du Centre is responsible for the data collected on this site. Any question about that data may be addressed to the hotel at the details given in the legal notice."
+            "Hôtel Le Relais du Centre is the data controller for the data collected on this site. Any question about that data may be addressed to the hotel at the details given in the legal notice."
           ]
         },
         {
