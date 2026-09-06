@@ -4,15 +4,6 @@ import { Link } from "@/i18n/navigation";
 import { getPublicSettings } from "@/lib/content";
 import type { StaticPathname } from "@/i18n/routing";
 
-const NAV: Array<{ href: StaticPathname; key: string }> = [
-  { href: "/chambres", key: "rooms" },
-  { href: "/services", key: "services" },
-  { href: "/galerie", key: "gallery" },
-  { href: "/notre-maison", key: "hotel" },
-  { href: "/questions", key: "faq" },
-  { href: "/contact", key: "contact" },
-];
-
 const LEGAL: Array<{ href: StaticPathname; key: string }> = [
   { href: "/mentions-legales", key: "legal" },
   { href: "/conditions", key: "terms" },
@@ -21,7 +12,6 @@ const LEGAL: Array<{ href: StaticPathname; key: string }> = [
 
 export async function Footer() {
   const t = await getTranslations("footer");
-  const tNav = await getTranslations("nav");
   const settings = await getPublicSettings();
   const { hotel_contact: contact } = settings;
   const year = new Date().getFullYear();
@@ -32,7 +22,17 @@ export async function Footer() {
           à gauche de l'écran et le bloc « Informations » à droite. Un pied de
           page centré sur 1 150 px laissait deux vides latéraux qui n'avaient
           aucune raison d'être. Hauteur resserrée au passage. */}
-      <div className="grid gap-8 px-5 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+      {/* TROIS COLONNES, PLUS DE MENU. Le pied de page reprenait les sept
+          liens déjà présents dans l'en-tête, qui est collant et visible sur
+          toute la hauteur de chaque page. Un visiteur ne descend pas au pied
+          d'une page pour retrouver un menu qu'il a sous les yeux.
+
+          Ce qu'on y cherche vraiment est resté : de quoi appeler, écrire ou
+          situer l'établissement, et les documents d'information. Aucun lien
+          n'est perdu pour autant — l'en-tête les porte tous, sur toutes les
+          pages, y compris pour les moteurs de recherche.
+          ---------------------------------------------------------------- */}
+      <div className="grid gap-8 px-5 py-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
         <div>
           <p className="font-display text-lg tracking-wide text-brown">
             LE RELAIS <span className="text-bronze">DU CENTRE</span>
@@ -40,21 +40,6 @@ export async function Footer() {
           <p className="signature mt-1 text-xl">{t("tagline")}</p>
         </div>
 
-        <nav aria-labelledby="footer-nav">
-          <h2 id="footer-nav" className="eyebrow mb-4">{t("navTitle")}</h2>
-          <ul className="space-y-2">
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-sm text-brown-soft transition-colors hover:text-bronze"
-                >
-                  {tNav(item.key)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
 
         <div>
           <h2 className="eyebrow mb-4">{t("contactTitle")}</h2>
