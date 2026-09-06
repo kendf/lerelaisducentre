@@ -240,6 +240,50 @@
     letter-spacing: -0.015em;
   }
 
+  /* LES TARIFS ONT LEUR PROPRE ÉCRITURE.
+     `.numeric` reste en Inter : il sert aux tableaux du back-office, où des
+     colonnes de chiffres doivent s'aligner et rester lisibles à 13 px toute la
+     journée. Un prix affiché à un client ne fait pas ce métier-là — il est lu
+     une fois, en grand, et il décide d'un achat. Il mérite la police des
+     titres, qui est celle de l'identité de la maison.
+
+     `lining-nums` est explicite : Playfair Display possède des chiffres
+     elzéviriens, ceux qui descendent sous la ligne. Ravissants dans un
+     paragraphe, illisibles dans un montant qu'on compare à un autre. */
+  .price {
+    font-family: var(--font-display);
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
+    letter-spacing: -0.005em;
+  }
+
+  /* LIEN DE NAVIGATION. Le trait ne s'allume pas, il SE DÉPLOIE — de zéro à
+     toute la largeur du libellé. La différence n'est pas cosmétique : un trait
+     qui apparaît d'un coup ressemble à un défaut d'affichage, un trait qui se
+     déploie désigne le mot qu'on vient de viser.
+
+     La page courante porte le même trait, à demeure : c'est le repère, et il
+     ne dépend pas de la seule couleur — le bronze sur l'ivoire ne se distingue
+     pas pour tout le monde. */
+  .nav-link {
+    position: relative;
+    transition: color 200ms ease;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.55rem;
+    height: 1px;
+    width: 0;
+    background-color: var(--color-bronze);
+    transition: width 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-link:hover::after,
+  .nav-link[aria-current="page"]::after {
+    width: 100%;
+  }
+
   .field {
     width: 100%;
     padding: 0.75rem 0.9rem;
@@ -248,14 +292,47 @@
     border-radius: var(--radius-card);
     font-size: 0.95rem;
     color: var(--color-brown);
+    /* Le champ RÉPOND. Sans transition, la bordure saute d'un état à l'autre et
+       le formulaire paraît inerte ; avec, la barre de recherche accuse réception
+       de chaque clic. C'est le seul mouvement qu'on s'autorise ici — un champ de
+       saisie n'a pas à être spectaculaire, il a à être vivant. */
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      background-color 200ms ease;
   }
-  .field:focus { border-color: var(--color-bronze); outline-offset: 0; }
+  .field:focus {
+    border-color: var(--color-bronze);
+    background-color: #fff;
+    /* L'anneau REMPLACE le contour du navigateur, il ne s'y ajoute pas : deux
+       marques de focus superposées sont plus confuses qu'une seule. Il reste
+       parfaitement visible au clavier, ce qui est la seule chose qui compte. */
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-bronze) 20%, transparent);
+  }
   .field::placeholder { color: color-mix(in srgb, var(--color-brown-soft) 60%, transparent); }
+}
+
+/* Apparition à l'ouverture. Réservée au panneau de recherche de l'accueil :
+   c'est le premier geste proposé au visiteur, il mérite d'être remarqué une
+   fois. Généralisée à toute la page, la même animation deviendrait une
+   nuisance à chaque navigation. */
+@layer utilities {
+  .fade-up {
+    animation: fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* Respect des préférences système : aucune animation pour qui n'en veut pas. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .fade-up { animation: none; }
+  .nav-link::after { transition: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
