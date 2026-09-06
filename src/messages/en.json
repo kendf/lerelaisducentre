@@ -16,7 +16,8 @@
     "close": "Close",
     "language": "Language",
     "switchTo": "Français",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "deskOpen": "Reception open 24/7"
   },
   "common": {
     "from": "From",
@@ -162,7 +163,7 @@
     "step": "Step {current} of {total}",
     "step1": "Dates & room",
     "step2": "Your details",
-    "step3": "Deposit",
+    "step3": "Summary",
     "searchTitle": "Your stay",
     "checkIn": "Arrival",
     "checkOut": "Departure",
@@ -228,7 +229,17 @@
       "INVALID_GUEST_DETAILS": "Please check your contact details.",
       "HOLD_EXPIRED": "The payment window has expired and the room has been released.",
       "GENERIC": "Something went wrong. Please try again or contact us directly."
-    }
+    },
+    "step4": "Payment",
+    "recapTitle": "Check your booking",
+    "recapLead": "Nothing has been charged yet. Review the details below, then continue to the deposit payment.",
+    "recapConfirm": "Continue to payment",
+    "recapEdit": "Edit my details",
+    "payNowLabel": "Due now",
+    "depositBadge": "{percent}% deposit",
+    "seeRoom": "View the room",
+    "roomTypeLabel": "Category",
+    "anyRoom": "All categories"
   },
   "footer": {
     "tagline": "Le temps d'une pause",
@@ -245,7 +256,180 @@
     "noticeTitle": "Legal notice",
     "termsTitle": "Booking terms",
     "privacyTitle": "Privacy policy",
-    "placeholder": "The content of this page will be supplied by the hotel before launch (specification §9)."
+    "updated": "Last updated: 6 September 2026",
+    "toComplete": "The operator's registration details — RCCM number, tax registration, legal form — are to be supplied by the hotel before the site goes live.",
+    "notice": {
+      "sections": [
+        {
+          "heading": "Site publisher",
+          "body": [
+            "Hôtel Le Relais du Centre — tourist accommodation establishment located in Tiébissou, Côte d'Ivoire.",
+            "RCCM number: [to be completed]. Tax registration: [to be completed]. Legal form and share capital: [to be completed].",
+            "Publication director: the hotel manager."
+          ]
+        },
+        {
+          "heading": "Contact",
+          "body": [
+            "Address: {address}. Telephone: {phone}. Email: {email}.",
+            "Any question about the site or a booking may be sent to reception by telephone, WhatsApp or email."
+          ]
+        },
+        {
+          "heading": "Hosting",
+          "body": [
+            "The site is hosted by Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, United States.",
+            "Booking data is hosted by Supabase Inc., on infrastructure located in the European Union."
+          ]
+        },
+        {
+          "heading": "Intellectual property",
+          "body": [
+            "All elements of this site — text, layout, visual identity, code — are protected. Any reproduction, even partial, requires the written permission of the hotel.",
+            "The site was developed by MapDevs."
+          ]
+        },
+        {
+          "heading": "Photographs",
+          "body": [
+            "The images currently online are illustrative. The hotel's own photographs will be added before commercial launch, and this paragraph will then credit their author."
+          ]
+        },
+        {
+          "heading": "Liability",
+          "body": [
+            "The hotel endeavours to keep the information on this site accurate and current. The availability and rates shown at the time of booking prevail; descriptions and photographs are indicative.",
+            "The hotel cannot be held liable for a temporary unavailability of the site, nor for a failure of the payment service, which is operated by its provider."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "sections": [
+        {
+          "heading": "Purpose",
+          "body": [
+            "These terms govern room bookings made online on this site. Making a booking constitutes acceptance of them."
+          ]
+        },
+        {
+          "heading": "Rates",
+          "body": [
+            "Rates are shown in CFA francs (XOF), per night and per room, breakfast included. They are inclusive of all taxes.",
+            "The applicable rate is the one displayed when the booking is confirmed. A later change to the hotel's rates does not affect a booking already confirmed."
+          ]
+        },
+        {
+          "heading": "Deposit and payment",
+          "body": [
+            "A deposit of {percent}% of the total stay is required to confirm the booking. The balance is settled on arrival.",
+            "The deposit is paid online by Mobile Money — Orange Money, Wave, MTN Money or Moov Money — through the CinetPay aggregator. No payment details are stored by the hotel.",
+            "The room is held for {holdMinutes} minutes while payment is made. After that time without payment, it is automatically returned to sale and the booking is abandoned."
+          ]
+        },
+        {
+          "heading": "Confirmation",
+          "body": [
+            "A booking is firm only once the deposit has actually been received. A confirmation bearing a reference is then sent by email and WhatsApp.",
+            "That reference is enough to retrieve the booking at reception. Please keep it until arrival."
+          ]
+        },
+        {
+          "heading": "Cancellation and changes",
+          "body": [
+            "Any booking may be cancelled free of charge up to {hours} hours before the arrival date. The deposit is then refunded in full, by the same payment method.",
+            "After that deadline, the deposit is retained by the hotel as compensation for holding the room.",
+            "Any change request — dates, room category, number of guests — should be made directly to reception and remains subject to availability."
+          ]
+        },
+        {
+          "heading": "No-show",
+          "body": [
+            "If the guest does not arrive on the expected day and gives no notice, the room is released at noon the following day and the deposit is retained by the hotel."
+          ]
+        },
+        {
+          "heading": "Arrival and departure",
+          "body": [
+            "Rooms are available from {checkIn} on the day of arrival, and must be vacated before {checkOut} on the day of departure.",
+            "Late arrival is possible: reception is open twenty-four hours a day. It is nonetheless preferable to give notice."
+          ]
+        },
+        {
+          "heading": "Occupancy",
+          "body": [
+            "Each room category states its maximum number of occupants. That number may not be exceeded, for safety and insurance reasons.",
+            "Proof of identity may be requested on arrival for each adult guest."
+          ]
+        },
+        {
+          "heading": "Governing law",
+          "body": [
+            "These terms are governed by Ivorian law. Any dispute falls under the jurisdiction of the Ivorian courts, after an attempt at amicable settlement."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "sections": [
+        {
+          "heading": "Data controller",
+          "body": [
+            "Hôtel Le Relais du Centre is responsible for the data collected on this site. Any question about that data may be addressed to the hotel at the details given in the legal notice."
+          ]
+        },
+        {
+          "heading": "Data collected",
+          "body": [
+            "When booking: surname, first name, email address, telephone number, country of residence, stay dates, room category, number of guests and, where applicable, any notes left in the comment field.",
+            "When sending a message through the contact form: name, contact details and message content.",
+            "The site collects no browsing data for advertising purposes and installs no analytics tracker."
+          ]
+        },
+        {
+          "heading": "Purposes",
+          "body": [
+            "This data is used solely to process the booking, send the confirmation and practical information, prepare the guest's arrival, and answer messages received.",
+            "It is neither sold nor rented, nor used for marketing without prior consent."
+          ]
+        },
+        {
+          "heading": "Who has access",
+          "body": [
+            "The data is accessible to authorised hotel staff, according to their role: reception sees bookings, management sees commercial settings, administration sees staff accounts.",
+            "It is processed by the technical providers required for the service: Supabase for database hosting, Vercel for site hosting, CinetPay for collecting the deposit, and Zavu for sending confirmations by WhatsApp, SMS and email.",
+            "No other third party has access to it."
+          ]
+        },
+        {
+          "heading": "Payment",
+          "body": [
+            "The deposit is processed by CinetPay. The guest's payment credentials — Mobile Money number, validation code — are entered with that provider and never pass through this site. The hotel keeps only the transaction reference and its amount."
+          ]
+        },
+        {
+          "heading": "Retention",
+          "body": [
+            "Booking data is kept for the duration of the stay, and then for as long as the hotel's accounting and tax obligations require.",
+            "Contact form messages are kept until handled, then for no more than one year."
+          ]
+        },
+        {
+          "heading": "Your rights",
+          "body": [
+            "Under Ivorian law no. 2013-450 of 19 June 2013 on the protection of personal data, everyone has the right to access, correct, object to and delete data concerning them.",
+            "These rights are exercised with the hotel, at the details given in the legal notice. A complaint may also be sent to the Telecommunications Regulatory Authority of Côte d'Ivoire (ARTCI)."
+          ]
+        },
+        {
+          "heading": "Cookies",
+          "body": [
+            "The site sets only technical cookies, essential to its operation: the chosen language, and tracking the booking in progress during payment.",
+            "These cookies allow no advertising tracking and expire by themselves once the booking is complete."
+          ]
+        }
+      ]
+    }
   },
   "notFound": {
     "title": "Page not found",

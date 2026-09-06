@@ -16,7 +16,8 @@
     "close": "Fermer",
     "language": "Langue",
     "switchTo": "English",
-    "faq": "Questions fréquentes"
+    "faq": "Questions fréquentes",
+    "deskOpen": "Réception ouverte 24h/24"
   },
   "common": {
     "from": "À partir de",
@@ -162,7 +163,7 @@
     "step": "Étape {current} sur {total}",
     "step1": "Dates & chambre",
     "step2": "Vos informations",
-    "step3": "Acompte",
+    "step3": "Récapitulatif",
     "searchTitle": "Vos dates de séjour",
     "checkIn": "Arrivée",
     "checkOut": "Départ",
@@ -228,7 +229,17 @@
       "INVALID_GUEST_DETAILS": "Merci de vérifier vos coordonnées.",
       "HOLD_EXPIRED": "Le délai de paiement est écoulé et la chambre a été remise à la vente.",
       "GENERIC": "Une erreur est survenue. Merci de réessayer ou de nous contacter directement."
-    }
+    },
+    "step4": "Paiement",
+    "recapTitle": "Vérifiez votre réservation",
+    "recapLead": "Rien n'est encore réglé. Relisez les informations ci-dessous, puis passez au paiement de l'acompte.",
+    "recapConfirm": "Procéder au paiement",
+    "recapEdit": "Modifier mes informations",
+    "payNowLabel": "À régler maintenant",
+    "depositBadge": "Acompte de {percent} %",
+    "seeRoom": "Voir la chambre",
+    "roomTypeLabel": "Catégorie",
+    "anyRoom": "Toutes les catégories"
   },
   "footer": {
     "tagline": "Le temps d'une pause",
@@ -245,7 +256,180 @@
     "noticeTitle": "Mentions légales",
     "termsTitle": "Conditions de réservation",
     "privacyTitle": "Politique de confidentialité",
-    "placeholder": "Le contenu de cette page sera fourni par l'établissement avant la mise en ligne (cahier des charges §9)."
+    "updated": "Dernière mise à jour : 6 septembre 2026",
+    "toComplete": "Les informations d'identification de l'exploitant — numéro RCCM, déclaration fiscale d'existence, forme juridique — sont à compléter par l'établissement avant la mise en ligne définitive.",
+    "notice": {
+      "sections": [
+        {
+          "heading": "Éditeur du site",
+          "body": [
+            "Hôtel Le Relais du Centre — établissement d'hébergement touristique situé à Tiébissou, en Côte d'Ivoire.",
+            "Numéro RCCM : [à compléter]. Déclaration fiscale d'existence : [à compléter]. Forme juridique et capital social : [à compléter].",
+            "Directeur de la publication : le gérant de l'établissement."
+          ]
+        },
+        {
+          "heading": "Contact",
+          "body": [
+            "Adresse : {address}. Téléphone : {phone}. Courriel : {email}.",
+            "Toute demande relative au site ou à une réservation peut être adressée à la réception, par téléphone, par WhatsApp ou par courriel."
+          ]
+        },
+        {
+          "heading": "Hébergement du site",
+          "body": [
+            "Le site est hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.",
+            "Les données de réservation sont hébergées par Supabase Inc., sur une infrastructure située dans l'Union européenne."
+          ]
+        },
+        {
+          "heading": "Propriété intellectuelle",
+          "body": [
+            "L'ensemble des éléments du site — textes, mise en page, identité visuelle, code — est protégé. Toute reproduction, même partielle, est soumise à l'autorisation écrite de l'établissement.",
+            "Le développement du site a été réalisé par MapDevs."
+          ]
+        },
+        {
+          "heading": "Photographies",
+          "body": [
+            "Les visuels actuellement en ligne sont des images d'illustration. Les photographies définitives de l'établissement seront intégrées avant la mise en service commerciale, et ce paragraphe précisera alors leur auteur."
+          ]
+        },
+        {
+          "heading": "Responsabilité",
+          "body": [
+            "L'établissement s'efforce de maintenir les informations du site exactes et à jour. Les disponibilités et les tarifs affichés au moment de la réservation font foi ; les descriptions et photographies ont valeur indicative.",
+            "L'établissement ne saurait être tenu responsable d'une indisponibilité temporaire du site, ni d'un dysfonctionnement du service de paiement, qui relève de son prestataire."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "sections": [
+        {
+          "heading": "Objet",
+          "body": [
+            "Les présentes conditions régissent les réservations de chambres effectuées en ligne sur ce site. Toute réservation vaut acceptation de ces conditions."
+          ]
+        },
+        {
+          "heading": "Tarifs",
+          "body": [
+            "Les tarifs sont indiqués en francs CFA (XOF), par nuit et par chambre, petit-déjeuner inclus. Ils s'entendent toutes taxes comprises.",
+            "Le tarif applicable est celui affiché au moment de la validation de la réservation. Une modification ultérieure des tarifs de l'établissement est sans effet sur une réservation déjà confirmée."
+          ]
+        },
+        {
+          "heading": "Acompte et paiement",
+          "body": [
+            "Un acompte de {percent} % du montant total du séjour est exigé pour confirmer la réservation. Le solde se règle sur place, à l'arrivée.",
+            "L'acompte se règle en ligne par Mobile Money — Orange Money, Wave, MTN Money ou Moov Money — via l'agrégateur CinetPay. Aucune coordonnée de paiement n'est conservée par l'établissement.",
+            "La chambre est retenue {holdMinutes} minutes le temps du règlement. Passé ce délai sans paiement, elle est automatiquement remise à la vente et la réservation est abandonnée."
+          ]
+        },
+        {
+          "heading": "Confirmation",
+          "body": [
+            "La réservation n'est ferme qu'après encaissement effectif de l'acompte. Une confirmation portant une référence est alors envoyée par courriel et par WhatsApp.",
+            "Cette référence suffit à retrouver la réservation à la réception. Il est recommandé de la conserver jusqu'à l'arrivée."
+          ]
+        },
+        {
+          "heading": "Annulation et modification",
+          "body": [
+            "Toute réservation peut être annulée sans frais jusqu'à {hours} heures avant la date d'arrivée. L'acompte est alors intégralement remboursé, par le même moyen de paiement.",
+            "Passé ce délai, l'acompte reste acquis à l'établissement à titre d'indemnité d'immobilisation.",
+            "Toute demande de modification — dates, catégorie de chambre, nombre de voyageurs — s'adresse directement à la réception et reste soumise aux disponibilités."
+          ]
+        },
+        {
+          "heading": "Non-présentation",
+          "body": [
+            "En l'absence du client le jour de l'arrivée et sans nouvelle de sa part, la chambre est libérée le lendemain à midi et l'acompte reste acquis à l'établissement."
+          ]
+        },
+        {
+          "heading": "Arrivée et départ",
+          "body": [
+            "Les chambres sont disponibles à partir de {checkIn} le jour de l'arrivée, et doivent être libérées avant {checkOut} le jour du départ.",
+            "Une arrivée tardive est possible : la réception est ouverte vingt-quatre heures sur vingt-quatre. Il reste préférable de la signaler à l'avance."
+          ]
+        },
+        {
+          "heading": "Capacité d'accueil",
+          "body": [
+            "Chaque catégorie de chambre indique son nombre maximal d'occupants. Ce nombre ne peut être dépassé, pour des raisons de sécurité et d'assurance.",
+            "Une pièce d'identité peut être demandée à l'arrivée pour chaque voyageur majeur."
+          ]
+        },
+        {
+          "heading": "Droit applicable",
+          "body": [
+            "Les présentes conditions sont soumises au droit ivoirien. Tout différend relève de la compétence des juridictions ivoiriennes, après recherche d'une solution amiable."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "sections": [
+        {
+          "heading": "Responsable du traitement",
+          "body": [
+            "L'Hôtel Le Relais du Centre est responsable des données collectées sur ce site. Toute question relative à ces données peut lui être adressée aux coordonnées figurant aux mentions légales."
+          ]
+        },
+        {
+          "heading": "Données collectées",
+          "body": [
+            "Lors d'une réservation : nom, prénom, adresse électronique, numéro de téléphone, pays de résidence, dates de séjour, catégorie de chambre, nombre de voyageurs et, le cas échéant, les précisions laissées en commentaire.",
+            "Lors d'un message envoyé par le formulaire de contact : nom, moyen de contact et contenu du message.",
+            "Le site ne collecte aucune donnée de navigation à des fins publicitaires et n'installe aucun traceur de mesure d'audience."
+          ]
+        },
+        {
+          "heading": "Finalités",
+          "body": [
+            "Ces données servent exclusivement à traiter la réservation, à envoyer la confirmation et les informations pratiques du séjour, à préparer l'accueil, et à répondre aux messages reçus.",
+            "Elles ne sont ni vendues, ni louées, ni utilisées à des fins de prospection sans accord préalable."
+          ]
+        },
+        {
+          "heading": "Qui y a accès",
+          "body": [
+            "Les données sont accessibles au personnel habilité de l'établissement, selon son rôle : la réception voit les réservations, la gérance les paramètres commerciaux, l'administration les comptes du personnel.",
+            "Elles sont traitées par les prestataires techniques nécessaires au service : Supabase pour l'hébergement de la base, Vercel pour l'hébergement du site, CinetPay pour l'encaissement de l'acompte, et Zavu pour l'envoi des confirmations par WhatsApp, SMS et courriel.",
+            "Aucun autre tiers n'y a accès."
+          ]
+        },
+        {
+          "heading": "Paiement",
+          "body": [
+            "Le règlement de l'acompte est traité par CinetPay. Les identifiants de paiement du client — numéro Mobile Money, code de validation — sont saisis chez ce prestataire et ne transitent jamais par ce site. L'établissement ne conserve que la référence de la transaction et son montant."
+          ]
+        },
+        {
+          "heading": "Durée de conservation",
+          "body": [
+            "Les données de réservation sont conservées le temps du séjour, puis pendant la durée nécessaire aux obligations comptables et fiscales de l'établissement.",
+            "Les messages du formulaire de contact sont conservés jusqu'à leur traitement, puis un an au plus."
+          ]
+        },
+        {
+          "heading": "Vos droits",
+          "body": [
+            "Conformément à la loi ivoirienne n° 2013-450 du 19 juin 2013 relative à la protection des données à caractère personnel, chacun dispose d'un droit d'accès, de rectification, d'opposition et de suppression des données le concernant.",
+            "Ces droits s'exercent auprès de l'établissement, aux coordonnées des mentions légales. Une réclamation peut également être adressée à l'Autorité de régulation des télécommunications de Côte d'Ivoire (ARTCI)."
+          ]
+        },
+        {
+          "heading": "Cookies",
+          "body": [
+            "Le site dépose uniquement des cookies techniques, indispensables à son fonctionnement : la langue choisie, et le suivi de la réservation en cours pendant le parcours de paiement.",
+            "Ces cookies ne permettent aucun suivi publicitaire et expirent d'eux-mêmes au terme de la réservation."
+          ]
+        }
+      ]
+    }
   },
   "notFound": {
     "title": "Page introuvable",
