@@ -429,7 +429,12 @@
           ]
         }
       ]
-    }
+    },
+    "noticeShort": "Mentions légales",
+    "termsShort": "Conditions",
+    "privacyShort": "Confidentialité",
+    "toc": "Sommaire",
+    "docsNav": "Documents d’information"
   },
   "notFound": {
     "title": "Page introuvable",

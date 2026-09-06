@@ -429,7 +429,12 @@
           ]
         }
       ]
-    }
+    },
+    "noticeShort": "Legal notice",
+    "termsShort": "Terms",
+    "privacyShort": "Privacy",
+    "toc": "Contents",
+    "docsNav": "Information documents"
   },
   "notFound": {
     "title": "Page not found",
