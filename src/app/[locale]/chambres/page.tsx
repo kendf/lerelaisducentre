@@ -85,7 +85,7 @@ export default async function RoomsPage({
           className="absolute inset-0"
         />
         <div className="absolute inset-0 bg-brown/55" aria-hidden />
-        <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-14 lg:px-8">
+        <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-24 lg:px-8 lg:pb-28">
           <p className="eyebrow eyebrow-rule text-bronze-tint">
             {t("subtitle")}
           </p>
@@ -99,16 +99,30 @@ export default async function RoomsPage({
       </section>
 
       {/* --- Barre de disponibilité ----------------------------------------
-          Collée sous l'en-tête pendant le défilement : le visiteur compare les
-          catégories sans jamais perdre de vue la question de ses dates.
+          ELLE REMONTE SUR L'IMAGE, puis se fixe sous l'en-tête au défilement.
+
+          La version précédente était une bande pleine largeur, bordée en haut
+          et en bas, posée entre le bandeau et le catalogue. Elle y jouait le
+          rôle d'un séparateur — une cloison de plus dans une page qui en avait
+          déjà assez — au lieu de celui d'un outil.
+
+          Remontée de 4 rem, elle chevauche la photographie : elle appartient au
+          bandeau, elle ne clôt pas une section. Le panneau porte son propre fond
+          et son ombre, ce qui la détache sans qu'aucun filet ne soit nécessaire.
+
+          Le collant reste réservé au grand écran : sur un téléphone, une barre
+          de cinq champs immobilisée en haut mangerait la moitié de la hauteur
+          utile.
           -------------------------------------------------------------------- */}
-      <div className="sticky top-20 z-30 border-y border-ivory-line bg-ivory/95 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-5 py-4 lg:px-8">
-          <StaySearchForm
-            defaults={searchDefaults}
-            roomTypes={roomOptions}
-            variant="bar"
-          />
+      <div className="relative z-30 -mt-16 lg:sticky lg:top-20">
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          <div className="bg-cream p-4 shadow-[0_6px_28px_rgba(59,42,30,0.16)] lg:p-5">
+            <StaySearchForm
+              defaults={searchDefaults}
+              roomTypes={roomOptions}
+              variant="bar"
+            />
+          </div>
         </div>
       </div>
 
