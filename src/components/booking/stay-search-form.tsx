@@ -7,13 +7,26 @@ import { useRouter } from "@/i18n/navigation";
 import { addDaysIso, hotelToday } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
+/** Catégorie proposée au filtre, déjà traduite par la page appelante. */
+export interface SearchRoomOption {
+  id: string;
+  name: string;
+}
+
 interface StaySearchFormProps {
   defaults: {
     checkIn: string;
     checkOut: string;
     adults: number;
     children: number;
+    /** Catégorie présélectionnée. Chaîne vide = toutes. */
+    roomTypeId?: string;
   };
+  /**
+   * Catégories de l'établissement. Omises, le champ n'apparaît pas : une liste
+   * déroulante vide vaudrait moins que pas de liste du tout.
+   */
+  roomTypes?: SearchRoomOption[];
   /**
    * `page`  : encadré posé dans le flux, sur la page Réserver.
    * `panel` : compact sur deux rangées, pour le panneau d'ouverture de
@@ -36,6 +49,7 @@ interface StaySearchFormProps {
  */
 export function StaySearchForm({
   defaults,
+  roomTypes,
   variant = "page",
 }: StaySearchFormProps) {
   const t = useTranslations("booking");
@@ -46,6 +60,9 @@ export function StaySearchForm({
   const [checkOut, setCheckOut] = useState(defaults.checkOut);
   const [adults, setAdults] = useState(defaults.adults);
   const [children, setChildren] = useState(defaults.children);
+  const [roomTypeId, setRoomTypeId] = useState(defaults.roomTypeId ?? "");
+
+  const showRoomTypes = Boolean(roomTypes && roomTypes.length > 0);
 
   // La date de départ suit toujours celle d'arrivée : on corrige plutôt que
   // d'afficher une erreur après coup.
@@ -63,6 +80,9 @@ export function StaySearchForm({
         checkOut,
         adults: String(adults),
         children: String(children),
+        // Absente de l'URL quand aucune catégorie n'est choisie : une adresse
+        // partagée ne doit pas porter un filtre que personne n'a demandé.
+        ...(roomTypeId ? { room: roomTypeId } : {}),
       },
     });
   }
@@ -80,10 +100,24 @@ export function StaySearchForm({
         // du panneau ivoire, il ne s'y superpose pas.
         panel && "grid-cols-2",
         // En barre : une seule rangée, alignée sur la ligne de base des champs.
-        bar && "grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5 lg:items-end",
+        // Le bouton prend la largeur de son libellé, pas une fraction de la
+        // grille : « Voir les disponibilités » ne tient pas dans un sixième de
+        // barre et passait à la ligne. Les champs se partagent le reste.
+        bar &&
+          cn(
+            "grid-cols-2 gap-3 sm:grid-cols-4 lg:items-end",
+            showRoomTypes
+              ? "lg:grid-cols-[repeat(5,minmax(0,1fr))_auto]"
+              : "lg:grid-cols-[repeat(4,minmax(0,1fr))_auto]"
+          ),
         !panel &&
           !bar &&
-          "border border-ivory-line bg-cream p-6 sm:grid-cols-2 lg:grid-cols-5 lg:items-end"
+          cn(
+            "border border-ivory-line bg-cream p-6 sm:grid-cols-2 lg:items-end",
+            showRoomTypes
+              ? "lg:grid-cols-[repeat(5,minmax(0,1fr))_auto]"
+              : "lg:grid-cols-[repeat(4,minmax(0,1fr))_auto]"
+          )
       )}
     >
       <label className="block">
@@ -148,12 +182,35 @@ export function StaySearchForm({
         </select>
       </label>
 
+      {showRoomTypes ? (
+        <label className={cn("block", panel && "col-span-2")}>
+          <span className="mb-1.5 block text-xs tracking-wider text-brown-soft uppercase">
+            {t("roomTypeLabel")}
+          </span>
+          <select
+            value={roomTypeId}
+            onChange={(e) => setRoomTypeId(e.target.value)}
+            className="field"
+          >
+            {/* « Toutes » en tête et par défaut : le filtre est une aide, il ne
+                doit jamais restreindre une recherche que le visiteur n'a pas
+                lui-même restreinte. */}
+            <option value="">{t("anyRoom")}</option>
+            {roomTypes!.map((room) => (
+              <option key={room.id} value={room.id}>
+                {room.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
+
       <button
         type="submit"
         className={cn(
-          "btn btn-primary w-full",
+          "btn btn-primary w-full whitespace-nowrap",
           panel && "col-span-2 mt-1",
-          bar && "col-span-2 sm:col-span-4 lg:col-span-1"
+          bar && "col-span-2 sm:col-span-4 lg:col-span-1 lg:w-auto"
         )}
       >
         <Search size={15} />

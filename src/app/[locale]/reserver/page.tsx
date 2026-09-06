@@ -6,7 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { BookingSteps } from "@/components/booking/booking-steps";
 import { StaySearchForm } from "@/components/booking/stay-search-form";
 import { HotelImage } from "@/components/site/hotel-image";
-import { getAvailability, getMedia, getPublicSettings } from "@/lib/content";
+import { getAvailability, getMedia, getPublicSettings, getRoomTypes } from "@/lib/content";
 import { addDaysIso, formatXof, hotelToday, nightsBetween } from "@/lib/utils";
 import { staySearchSchema } from "@/lib/validation/schemas";
 import type { AvailabilityRow, Locale } from "@/types/database";
@@ -80,9 +80,27 @@ export default async function BookingPage({
     }
   }
 
-  const media = await getMedia({ section: "room" });
+  const [media, roomTypes] = await Promise.all([
+    getMedia({ section: "room" }),
+    getRoomTypes(),
+  ]);
+  const roomOptions = roomTypes.map((room) => ({
+    id: room.id,
+    name: (room.content[lang] ?? room.content.fr).name,
+  }));
+
+  // Catégorie demandée. Validée contre le catalogue plutôt que reprise telle
+  // quelle : un identifiant inventé dans l'URL ne doit pas vider la liste des
+  // résultats sans que le visiteur comprenne pourquoi — il est ignoré.
+  const requestedRoom =
+    typeof sp.room === "string" && roomTypes.some((r) => r.id === sp.room)
+      ? sp.room
+      : "";
+
   const nights = nightsBetween(search.checkIn, search.checkOut);
-  const available = rows.filter((r) => r.is_available);
+  const available = rows
+    .filter((r) => r.is_available)
+    .filter((r) => !requestedRoom || r.room_type_id === requestedRoom);
 
   return (
     <>
@@ -94,7 +112,10 @@ export default async function BookingPage({
       <div className="mx-auto max-w-5xl px-5 py-14 lg:px-8 lg:py-16">
         <h1 className="font-display text-3xl">{t("searchTitle")}</h1>
         <div className="mt-8">
-          <StaySearchForm defaults={search} />
+          <StaySearchForm
+            defaults={{ ...search, roomTypeId: requestedRoom }}
+            roomTypes={roomOptions}
+          />
         </div>
 
         <p className="mt-4 text-xs text-brown-soft">
@@ -165,7 +186,7 @@ export default async function BookingPage({
 
                       <div className="text-right">
                         <p className="font-display text-2xl text-bronze">
-                          {formatXof(row.total_price_xof, lang)}
+                          {formatXof(row.total_price_xof)}
                         </p>
                         <p className="text-xs text-brown-soft">
                           {tCommon("night", { count: nights })}
