@@ -157,27 +157,25 @@ export default async function ConfirmationPage({
           <dl className="mt-8 space-y-3 text-sm">
             <div className="flex justify-between gap-6">
               <dt className="text-brown-soft">{t("summaryTotal")}</dt>
-              <dd className="numeric">
-                {formatXof(reservation.total_amount_xof, lang)}
+              <dd className="price">
+                {formatXof(reservation.total_amount_xof)}
               </dd>
             </div>
             <div className="flex justify-between gap-6">
               <dt className="text-brown-soft">{t("summaryDeposit")}</dt>
-              <dd className="numeric text-palm">
+              <dd className="price text-palm">
                 {formatXof(
                   confirmed
                     ? reservation.amount_paid_xof
-                    : reservation.deposit_amount_xof,
-                  lang
+                    : reservation.deposit_amount_xof
                 )}
               </dd>
             </div>
             <div className="flex items-baseline justify-between gap-6 border-t border-ivory-line pt-3">
               <dt>{t("summaryBalance")}</dt>
-              <dd className="numeric text-xl font-medium text-bronze">
+              <dd className="price text-xl font-medium text-bronze">
                 {formatXof(
-                  reservation.total_amount_xof - reservation.amount_paid_xof,
-                  lang
+                  reservation.total_amount_xof - reservation.amount_paid_xof
                 )}
               </dd>
             </div>

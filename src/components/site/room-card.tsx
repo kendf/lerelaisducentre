@@ -48,7 +48,7 @@ export async function RoomCard({ room, locale, cover }: RoomCardProps) {
         <p className="mt-4 text-sm text-brown">
           <span className="text-brown-soft">{t("from")} </span>
           <span className="font-display text-lg text-bronze">
-            {formatXof(room.base_price_xof, locale)}
+            {formatXof(room.base_price_xof)}
           </span>
           <span className="text-brown-soft"> {t("perNight")}</span>
         </p>

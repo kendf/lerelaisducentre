@@ -47,8 +47,8 @@ export function guestShortMessage(d: ConfirmationData, locale: Locale): string {
       ``,
       `Reference: ${d.reference}`,
       `${d.roomName}, ${formatDate(d.checkIn, "en")} to ${formatDate(d.checkOut, "en")}`,
-      `Deposit received: ${formatXof(d.depositPaidXof, "en")}`,
-      `Balance on arrival: ${formatXof(d.balanceXof, "en")}`,
+      `Deposit received: ${formatXof(d.depositPaidXof)}`,
+      `Balance on arrival: ${formatXof(d.balanceXof)}`,
       ``,
       `Check-in from ${d.checkInTime}. See you soon.`,
     ].join("\n");
@@ -59,8 +59,8 @@ export function guestShortMessage(d: ConfirmationData, locale: Locale): string {
     ``,
     `Référence : ${d.reference}`,
     `${d.roomName}, du ${formatDate(d.checkIn, "fr")} au ${formatDate(d.checkOut, "fr")}`,
-    `Acompte reçu : ${formatXof(d.depositPaidXof, "fr")}`,
-    `Solde à l'arrivée : ${formatXof(d.balanceXof, "fr")}`,
+    `Acompte reçu : ${formatXof(d.depositPaidXof)}`,
+    `Solde à l'arrivée : ${formatXof(d.balanceXof)}`,
     ``,
     `Arrivée à partir de ${d.checkInTime}. À bientôt.`,
   ].join("\n");
@@ -80,7 +80,7 @@ export function guestTemplateVariables(
     "2": d.reference,
     "3": d.roomName,
     "4": `${formatDate(d.checkIn, locale)} → ${formatDate(d.checkOut, locale)}`,
-    "5": formatXof(d.depositPaidXof, locale),
+    "5": formatXof(d.depositPaidXof),
   };
 }
 
@@ -107,14 +107,14 @@ export function guestEmailHtml(d: ConfirmationData, locale: Locale): string {
       en ? "Guests" : "Voyageurs",
       `${d.adults} ${en ? "adult(s)" : "adulte(s)"}${d.children ? ` + ${d.children} ${en ? "child(ren)" : "enfant(s)"}` : ""}`,
     ],
-    [en ? "Stay total" : "Total du séjour", formatXof(d.totalXof, locale)],
+    [en ? "Stay total" : "Total du séjour", formatXof(d.totalXof)],
     [
       en ? "Deposit received" : "Acompte reçu",
-      formatXof(d.depositPaidXof, locale),
+      formatXof(d.depositPaidXof),
     ],
     [
       en ? "Balance on arrival" : "Solde à l'arrivée",
-      formatXof(d.balanceXof, locale),
+      formatXof(d.balanceXof),
     ],
   ];
 
@@ -180,8 +180,8 @@ export function hotelMessage(d: ConfirmationData): string {
     `Du ${formatDate(d.checkIn, "fr")} au ${formatDate(d.checkOut, "fr")} (${d.nights} nuit${d.nights > 1 ? "s" : ""})`,
     `${d.adults} adulte(s)${d.children ? ` + ${d.children} enfant(s)` : ""}`,
     ``,
-    `Total : ${formatXof(d.totalXof, "fr")}`,
-    `Acompte encaissé : ${formatXof(d.depositPaidXof, "fr")}`,
-    `Solde à percevoir : ${formatXof(d.balanceXof, "fr")}`,
+    `Total : ${formatXof(d.totalXof)}`,
+    `Acompte encaissé : ${formatXof(d.depositPaidXof)}`,
+    `Solde à percevoir : ${formatXof(d.balanceXof)}`,
   ].join("\n");
 }

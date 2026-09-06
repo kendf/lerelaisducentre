@@ -161,7 +161,7 @@ export function DeskReservationForm({
         {nights > 0 && room ? (
           <p className="mt-5 border-t border-ivory-line pt-4 text-sm text-brown-soft">
             Estimation :{" "}
-            <span className="numeric font-medium text-bronze">
+            <span className="price font-medium text-bronze">
               {formatXof(estimate)}
             </span>{" "}
             pour {nights} nuit{nights > 1 ? "s" : ""}. Le montant définitif est

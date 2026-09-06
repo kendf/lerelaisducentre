@@ -6,15 +6,26 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Formatage des montants en francs CFA.
- * Le XOF n'a pas de décimales : `1 234 567 F CFA`, jamais `1 234 567,00`.
+ * Formatage des montants en francs CFA. Le XOF n'a pas de décimales :
+ * `1 234 567 F CFA`, jamais `1 234 567,00`.
+ *
+ * PAS DE VARIANTE PAR LANGUE. La version précédente passait la locale à
+ * `Intl.NumberFormat`, ce qui produisait en anglais `F CFA 45,000` — symbole
+ * devant et virgules — là où le français donne `45 000 F CFA`. Deux écritures
+ * du même prix sur le même site, selon la page où l'on se trouve.
+ *
+ * Le franc CFA s'écrit de la même façon en Côte d'Ivoire quelle que soit la
+ * langue du lecteur, et un visiteur anglophone qui compare un tarif entre la
+ * version anglaise et la facture de l'hôtel doit lire la même chose. Le format
+ * est donc unique, et la fonction ne prend plus de locale.
  */
-export function formatXof(amount: number, locale: string = "fr"): string {
-  return new Intl.NumberFormat(locale === "en" ? "en-GB" : "fr-FR", {
-    style: "currency",
-    currency: "XOF",
+export function formatXof(amount: number): string {
+  const value = new Intl.NumberFormat("fr-FR", {
     maximumFractionDigits: 0,
   }).format(amount);
+  // Espace insécable avant l'unité : un montant ne doit jamais se couper en
+  // fin de ligne entre le nombre et sa devise.
+  return `${value} F CFA`;
 }
 
 /** Date ISO (YYYY-MM-DD) — le format d'échange avec Postgres pour les nuitées. */
