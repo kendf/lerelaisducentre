@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ArrowRight } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
 import { HotelImage } from "@/components/site/hotel-image";
-import { getPublicSettings, getRoomTypes } from "@/lib/content";
+import { getMedia, getPublicSettings, getRoomTypes } from "@/lib/content";
+import type { Locale, MediaItem } from "@/types/database";
 
 export const revalidate = 300;
 
@@ -43,9 +45,11 @@ export default async function OurHousePage({
   const t = await getTranslations("hotel");
   const tHome = await getTranslations("home");
   const tBooking = await getTranslations("booking");
-  const [roomTypes, settings] = await Promise.all([
+  const lang = locale as Locale;
+  const [roomTypes, settings, media] = await Promise.all([
     getRoomTypes(),
     getPublicSettings(),
+    getMedia({}),
   ]);
 
   const totalRooms = roomTypes.reduce((sum, r) => sum + r.total_units, 0);
@@ -56,6 +60,29 @@ export default async function OurHousePage({
     { title: t("value2Title"), body: t("value2Body") },
     { title: t("value3Title"), body: t("value3Body") },
   ];
+
+  // Un aperçu, pas un doublon de la galerie : une image par univers de la
+  // maison (chambre, table, jardin, façade), choisie dans le pool réel — pas
+  // de chemin écrit en dur, sinon la mosaïque se fige le jour où l'hôtel
+  // change ses photos.
+  const pickBySection = (...sections: string[]) => {
+    for (const section of sections) {
+      const cover = media.find((m) => m.section === section && m.is_cover);
+      if (cover) return cover;
+    }
+    for (const section of sections) {
+      const any = media.find((m) => m.section === section);
+      if (any) return any;
+    }
+    return undefined;
+  };
+
+  const glimpse = [
+    pickBySection("room"),
+    pickBySection("restaurant", "bar"),
+    pickBySection("grounds"),
+    pickBySection("hotel", "lounge"),
+  ].filter((item): item is MediaItem => Boolean(item));
 
   return (
     <>
@@ -129,6 +156,48 @@ export default async function OurHousePage({
           </dl>
         </div>
       </section>
+
+      {/* --- En images — mosaïque d'aperçu --------------------------------
+          La page est presque entièrement du texte suivi jusqu'ici : quatre
+          images en une bande cassent la lecture avant qu'elle ne reparte
+          vers les chiffres, et orientent vers la galerie complète ceux qui
+          veulent voir davantage.
+          -------------------------------------------------------------------- */}
+      {glimpse.length > 0 ? (
+        <section className="mx-auto max-w-5xl px-5 py-section lg:px-8">
+          <p className="eyebrow eyebrow-rule text-center lg:text-left">
+            {t("galleryTeaserTitle")}
+          </p>
+
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {glimpse.map((item) => (
+              <li key={item.id}>
+                <Link
+                  href="/galerie"
+                  className="group block aspect-3/4 overflow-hidden bg-ivory-line"
+                >
+                  <HotelImage
+                    basePath={item.storage_path}
+                    alt={item.alt[lang] ?? item.alt.fr ?? ""}
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8 text-center lg:text-left">
+            <Link
+              href="/galerie"
+              className="inline-flex items-center gap-2 text-sm font-medium tracking-[0.14em] text-bronze uppercase transition-colors hover:text-bronze-dark"
+            >
+              {t("galleryCta")}
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        </section>
+      ) : null}
 
       {/* --- Chiffres et cadre ---------------------------------------------- */}
       <section className="mx-auto max-w-6xl px-5 py-section lg:px-8">

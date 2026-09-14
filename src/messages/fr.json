@@ -85,7 +85,9 @@
     "quote": "Le temps d'une pause",
     "quoteLead": "Ce qui se joue ici tient en une phrase.",
     "valuesLead": "Trois choses que nous ne négocions pas, parce que ce sont elles qui font revenir.",
-    "figuresTitle": "En quelques mots"
+    "figuresTitle": "En quelques mots",
+    "galleryTeaserTitle": "En images",
+    "galleryCta": "Voir la galerie"
   },
   "rooms": {
     "title": "Chambres & Suites",

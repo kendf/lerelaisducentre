@@ -85,7 +85,9 @@
     "quote": "Le temps d'une pause",
     "quoteLead": "What matters here fits in one line.",
     "valuesLead": "Three things we do not compromise on, because they are what brings people back.",
-    "figuresTitle": "In brief"
+    "figuresTitle": "In brief",
+    "galleryTeaserTitle": "In pictures",
+    "galleryCta": "View the gallery"
   },
   "rooms": {
     "title": "Rooms & Suites",
