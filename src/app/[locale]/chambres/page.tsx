@@ -78,7 +78,7 @@ export default async function RoomsPage({
       {/* --- Bandeau pleine largeur ---------------------------------------- */}
       <section className="relative h-[52vh] min-h-[340px] w-full overflow-hidden">
         <HotelImage
-          basePath="/images/chambres/suite/04"
+          basePath="/images/maison/chambres/superieure-plus/03"
           alt=""
           sizes="100vw"
           priority

@@ -302,14 +302,24 @@ export default async function RoomDetailPage({
 
                 return (
                   <li key={other.id}>
+                    {/* CARTE « AUTRE CHAMBRE ». Sur téléphone, l'ancienne version
+                        posait un nom puis un tarif en petit sous une grande arche :
+                        le prix, seule information qui décide du clic, était le
+                        texte le moins lisible de la carte.
+
+                        Le nom passe SUR la photographie, avec un voile pour rester
+                        lisible quelle que soit l'image. Sous la photo, le tarif
+                        prend un vrai corps de caractère, suivi de trois équipements
+                        — de quoi comparer sans ouvrir la fiche. L'arche est
+                        conservée : c'est le motif de la maison. */}
                     <Link
                       href={{
                         pathname: "/chambres/[slug]",
                         params: { slug: other.slug },
                       }}
-                      className="group block text-center"
+                      className="group flex h-full flex-col bg-cream shadow-[0_4px_20px_rgba(59,42,30,0.08)] transition-transform duration-500 hover:-translate-y-1"
                     >
-                      <div className="arch aspect-3/4 bg-ivory-line">
+                      <div className="arch relative aspect-4/5 overflow-hidden bg-ivory-line">
                         {otherCover ? (
                           <HotelImage
                             basePath={otherCover.storage_path}
@@ -318,13 +328,38 @@ export default async function RoomDetailPage({
                             className="transition-transform duration-700 group-hover:scale-[1.04]"
                           />
                         ) : null}
+                        <div
+                          aria-hidden="true"
+                          className="absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/15 to-transparent"
+                        />
+                        <p className="absolute inset-x-0 bottom-0 px-5 pb-4 font-display text-xl leading-tight text-ivory">
+                          {oc.name}
+                        </p>
                       </div>
-                      <p className="mt-5 font-display text-lg transition-colors group-hover:text-bronze">
-                        {oc.name}
-                      </p>
-                      <p className="price mt-1 text-sm text-brown-soft">
-                        {formatXof(other.base_price_xof)}
-                      </p>
+
+                      <div className="flex flex-1 flex-col px-5 pt-4 pb-5">
+                        <p className="flex items-baseline gap-1.5">
+                          <span className="price text-2xl font-medium text-bronze">
+                            {formatXof(other.base_price_xof)}
+                          </span>
+                          <span className="text-xs text-brown-soft">
+                            {tCommon("perNight")}
+                          </span>
+                        </p>
+
+                        {other.amenities.length > 0 ? (
+                          <ul className="mt-3 flex flex-wrap gap-1.5">
+                            {other.amenities.slice(0, 3).map((item) => (
+                              <li
+                                key={item}
+                                className="border border-ivory-line px-2 py-0.5 text-xs text-brown-soft"
+                              >
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
                     </Link>
                   </li>
                 );

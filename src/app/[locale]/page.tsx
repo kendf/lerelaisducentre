@@ -1,8 +1,9 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, BedDouble, Clock, LayoutGrid, MapPin } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
 import { HotelImage } from "@/components/site/hotel-image";
+import { HeroVideo } from "@/components/site/hero-video";
 import { RotatingImage } from "@/components/site/rotating-image";
 import { StaySearchForm } from "@/components/booking/stay-search-form";
 import { getMedia, getPublicSettings, getRoomTypes } from "@/lib/content";
@@ -37,11 +38,23 @@ export const revalidate = 300;
       autour d'elle.
    ============================================================================= */
 
-/** Visuels du panneau d'ouverture, alternés lentement. */
-const HERO_IMAGES = [
-  "/images/hotel/03",
-  "/images/chambres/suite/02",
-  "/images/cadre/05",
+/**
+ * Vignettes du bloc Bienvenue. Chacune fait défiler un univers de la maison —
+ * l'établissement, les chambres, la table — plutôt qu'une photographie figée.
+ * Toutes sont des photographies RÉELLES de l'hôtel.
+ */
+const WELCOME_CARDS = [
+  ["/images/maison/hotel/01", "/images/maison/hotel/02"],
+  [
+    "/images/maison/chambres/vip/01",
+    "/images/maison/chambres/superieure-plus/01",
+    "/images/maison/chambres/superieure/01",
+  ],
+  [
+    "/images/maison/restaurant/01",
+    "/images/maison/restaurant/02",
+    "/images/maison/chambres/superieure-plus/09",
+  ],
 ];
 
 export default async function HomePage({
@@ -85,7 +98,7 @@ export default async function HomePage({
       title: tServices("restaurantTitle"),
       body: tServices("restaurantBody"),
       hours: tServices("restaurantHours"),
-      image: "/images/restaurant/04",
+      image: "/images/maison/restaurant/01",
     },
     {
       title: tServices("barTitle"),
@@ -152,95 +165,104 @@ export default async function HomePage({
         </div>
 
         <div className="relative order-1 h-[52svh] lg:order-2 lg:h-auto">
-          <RotatingImage
-            images={HERO_IMAGES}
-            alt=""
-            priority
-            className="arch-corner absolute inset-0"
-          />
-        </div>
-      </section>
-
-      {/* =====================================================================
-          2. LA PAUSE — une bande presque vide
-          ===================================================================== */}
-      <section className="border-y border-ivory-line bg-ivory-deep px-5 py-14 text-center lg:py-16">
-        <p className="mx-auto max-w-2xl font-display text-2xl leading-relaxed text-balance sm:text-3xl">
-          {t("introTitle")}
-        </p>
-        <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-brown-soft">
-          {t("welcomeP2")}
-        </p>
-
-        {totalRooms > 0 ? (
-          <dl className="mx-auto mt-12 flex max-w-lg justify-center divide-x divide-ivory-line">
-            {[
-              { value: String(totalRooms), label: t("statRooms") },
-              { value: String(roomTypes.length), label: t("statCategories") },
-              { value: t("statReceptionValue"), label: t("statReception") },
-            ].map((stat) => (
-              <div key={stat.label} className="px-7">
-                <dt className="numeric text-2xl font-medium text-bronze">
-                  {stat.value}
-                </dt>
-                <dd className="mt-1 text-xs uppercase tracking-wider text-brown-soft">
-                  {stat.label}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        ) : null}
-      </section>
-
-      {/* =====================================================================
-          3. LA MAISON — panoramique, texte posé dessus
-          Placée AVANT les chambres, et c'est un choix de discours : un
-          visiteur qui découvre l'établissement veut d'abord savoir où il met
-          les pieds. Lui présenter quatre catégories et quatre tarifs avant de
-          lui avoir dit ce qu'est la maison, c'est vendre avant d'accueillir.
-          Les chambres suivent immédiatement, quand la question « et alors,
-          combien ? » se pose d'elle-même.
-          ===================================================================== */}
-      <section className="bg-ivory-deep py-section">
-        <div className="mx-auto max-w-6xl px-5 lg:px-8">
-          {/* Le format change avec l'écran, et ce n'est pas un détail : en 21/9
-              sur un téléphone, la bande ferait 150 px de haut — le texte posé
-              dessus déborderait. Le cadre s'allonge donc quand la largeur
-              manque, pour que la superposition tienne partout. */}
-          <div className="relative aspect-4/5 overflow-hidden sm:aspect-16/9 lg:aspect-21/9">
-            <HotelImage
-              basePath="/images/hotel/07"
-              alt=""
-              sizes="(min-width: 1024px) 1152px, 100vw"
+          <div className="arch-corner absolute inset-0 overflow-hidden bg-brown">
+            <HeroVideo
+              src="/images/maison/video/accueil.mp4"
+              poster="/images/maison/hotel/01-960.webp"
             />
-
-            {/* Voile dégradé. Sans lui, un texte clair posé sur une façade
-                claire et un ciel blanc devient illisible : la lisibilité ne
-                peut pas dépendre de ce que montre la photographie. */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/55 to-brown/20"
-            />
-
-            <div className="absolute inset-0 flex flex-col items-center justify-end px-6 pb-9 text-center sm:justify-center sm:pb-6 lg:px-12">
-              <p className="eyebrow text-ivory/85">{t("introEyebrow")}</p>
-              <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-ivory sm:mt-6 sm:text-[17px]">
-                {t("introBody")}
-              </p>
-              <Link
-                href="/notre-maison"
-                className="mt-7 inline-flex items-center gap-2 text-sm font-medium tracking-[0.14em] text-ivory uppercase transition-colors hover:text-bronze-tint"
-              >
-                {tCommon("seeMore")}
-                <ArrowRight size={15} />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
       {/* =====================================================================
-          4. CHAMBRES — portraits sommés d'une arche
+          2. BIENVENUE — trois vignettes vivantes, le discours en vis-à-vis
+          La version précédente empilait un texte centré, une rangée de chiffres
+          et un panoramique : trois respirations séparées pour dire une seule
+          chose, qui est cette maison. Ici tout se lit d'un regard. À gauche, ce
+          qu'on verra en arrivant — la façade, les chambres, la table — en
+          photographies réelles qui changent lentement. À droite, ce qu'on veut
+          savoir, et les trois chiffres qui le résument.
+
+          Les vignettes changent à des rythmes décalés (7, 8 et 9 s) :
+          synchronisées, elles basculeraient ensemble et tireraient l'œil au
+          moment précis où le visiteur lit le titre.
+          ===================================================================== */}
+      <section className="bg-ivory-deep py-section">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-12 lg:gap-16 lg:px-8">
+          <div className="grid grid-cols-2 gap-3 lg:col-span-5">
+            <div className="relative col-span-2 h-56 overflow-hidden shadow-[0_6px_24px_rgba(59,42,30,0.12)] sm:h-64">
+              <RotatingImage
+                images={WELCOME_CARDS[0]!}
+                alt=""
+                sizes="(min-width: 1024px) 40vw, 100vw"
+              />
+            </div>
+            <div className="relative h-36 overflow-hidden shadow-[0_6px_24px_rgba(59,42,30,0.12)] sm:h-44">
+              <RotatingImage
+                images={WELCOME_CARDS[1]!}
+                alt=""
+                interval={8000}
+                sizes="(min-width: 1024px) 20vw, 50vw"
+              />
+            </div>
+            <div className="relative h-36 overflow-hidden shadow-[0_6px_24px_rgba(59,42,30,0.12)] sm:h-44">
+              <RotatingImage
+                images={WELCOME_CARDS[2]!}
+                alt=""
+                interval={9000}
+                sizes="(min-width: 1024px) 20vw, 50vw"
+              />
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <p className="eyebrow eyebrow-rule">{t("introEyebrow")}</p>
+            <h2 className="mt-5 max-w-2xl text-3xl text-balance sm:text-4xl">
+              {t("introTitle")}
+            </h2>
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-brown-soft">
+              {t("introBody")}
+            </p>
+            <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-brown-soft">
+              {t("welcomeP2")}
+            </p>
+
+            {totalRooms > 0 ? (
+              <dl className="mt-9 grid max-w-xl grid-cols-3 gap-3 sm:gap-4">
+                {[
+                  { icon: BedDouble, value: String(totalRooms), label: t("statRooms") },
+                  { icon: LayoutGrid, value: String(roomTypes.length), label: t("statCategories") },
+                  { icon: Clock, value: t("statReceptionValue"), label: t("statReception") },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="flex flex-col items-center border border-ivory-line bg-cream px-2 py-5 text-center"
+                  >
+                    <stat.icon size={18} className="text-bronze-soft" aria-hidden="true" />
+                    {/* Le libellé est le terme (dt), le chiffre sa valeur (dd).
+                        L'ordre visuel — chiffre au-dessus — est rétabli en CSS,
+                        pour que la structure reste lue dans le bon sens. */}
+                    <dt className="order-last mt-1 text-xs tracking-wider text-brown-soft uppercase">
+                      {stat.label}
+                    </dt>
+                    <dd className="mt-2 font-display text-3xl leading-none text-bronze [font-variant-numeric:lining-nums]">
+                      {stat.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+
+            <Link href="/notre-maison" className="btn btn-outline mt-9">
+              {tCommon("seeMore")}
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          3. CHAMBRES — portraits sommés d'une arche
           Format vertical et arc plein cintre : une porte de chambre, pas une
           vignette de catalogue.
           ===================================================================== */}
@@ -313,7 +335,7 @@ export default async function HomePage({
       </section>
 
       {/* =====================================================================
-          5. SUR PLACE — mosaïque de vignettes
+          4. SUR PLACE — mosaïque de vignettes
           Les bandes alternées de la version précédente répétaient la figure de
           la page Services : deux fois le même geste, aucune valeur ajoutée à la
           seconde lecture. La mosaïque dit autre chose — trois lieux, un coup
@@ -351,7 +373,11 @@ export default async function HomePage({
                 />
 
                 <div className="absolute inset-x-0 bottom-0 p-6 text-ivory">
-                  <h3 className="font-display text-xl transition-transform duration-300 group-hover:-translate-y-1">
+                  {/* `text-ivory` porté par le titre lui-même, pas hérité du bloc :
+                      la couche de base du CSS impose le brun à tous les h3, et
+                      cette règle l'emporte sur une couleur simplement héritée.
+                      C'est ce qui rendait les noms illisibles sur les photos. */}
+                  <h3 className="font-display text-xl text-ivory transition-transform duration-300 group-hover:-translate-y-1">
                     {service.title}
                   </h3>
 
@@ -378,7 +404,7 @@ export default async function HomePage({
       </section>
 
       {/* =====================================================================
-          6. NOUS TROUVER — un panneau indicateur
+          5. NOUS TROUVER — un panneau indicateur
           L'adresse posée en grand, comme sur un panneau de route. C'est le
           motif du lieu : une halte signalée sur un axe.
           ===================================================================== */}
@@ -414,14 +440,14 @@ export default async function HomePage({
       </section>
 
       {/* =====================================================================
-          7. RÉSERVER — arche centrale
+          6. RÉSERVER — arche centrale
           Le motif d'ouverture revient en clôture, cette fois centré : la page
           se referme sur la porte par laquelle elle a commencé.
           ===================================================================== */}
       <section className="mx-auto max-w-4xl px-5 py-section text-center lg:px-8">
         <div className="arch mx-auto aspect-4/5 max-w-xs bg-ivory-line">
           <HotelImage
-            basePath="/images/chambres/familiale/02"
+            basePath="/images/maison/chambres/superieure-plus/02"
             alt=""
             sizes="320px"
           />

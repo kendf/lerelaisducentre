@@ -24,12 +24,15 @@ export function RotatingImage({
   alt,
   interval = 7000,
   priority = false,
+  sizes = "100vw",
   className,
 }: {
   images: string[];
   alt: string;
   interval?: number;
   priority?: boolean;
+  /** Largeur d'affichage : une vignette n'a pas à télécharger une image plein écran. */
+  sizes?: string;
   className?: string;
 }) {
   const [index, setIndex] = useState(0);
@@ -66,7 +69,7 @@ export function RotatingImage({
             <HotelImage
               basePath={basePath}
               alt={i === 0 ? alt : ""}
-              sizes="100vw"
+              sizes={sizes}
               priority={priority && i === 0}
             />
           </div>

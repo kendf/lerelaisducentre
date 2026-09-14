@@ -53,3 +53,9 @@ next-env.d.ts
 # Supabase
 /supabase/.temp
 /supabase/.branches
+
+# Photographies SOURCES de l'hôtel (JPG et vidéo originaux, ~29 Mo).
+# Tout ce qui est versionné sous public/ est déployé et téléchargeable par
+# n'importe qui. Le site n'utilise que les déclinaisons webp générées dans
+# public/images/maison/ : les originaux restent sur le poste.
+/public/images/lerelaisducentre/
