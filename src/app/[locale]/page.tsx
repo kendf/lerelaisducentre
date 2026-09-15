@@ -53,7 +53,7 @@ const WELCOME_CARDS = [
   [
     "/images/maison/restaurant/01",
     "/images/maison/restaurant/02",
-    "/images/maison/chambres/superieure-plus/09",
+    "/images/maison/restaurant/03",
   ],
 ];
 
